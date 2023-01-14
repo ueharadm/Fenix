@@ -39,7 +39,7 @@ public class MeetingController {
 }
 
 	/*
-	//TODO: Limpar código anterior ao Spring Boot
+	//TODO: Limpar cÃ³digo anterior ao Spring Boot
 
 	private static List<Meeting> meetingList = new ArrayList<Meeting>();
 	private static Integer lastUid = 0;
@@ -64,7 +64,7 @@ public class MeetingController {
 				return meeting;
 			}
 		}
-		System.err.println("Não existe reunião com este número cadastrada");
+		System.err.println("NÃ£o existe reuniÃ£o com este nÃºmero cadastrada");
 		return null;
 	}
 

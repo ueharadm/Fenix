@@ -39,7 +39,7 @@ public class Application {
 
 	/*
 		//TODO: Remover testes
-		//Testando aplicaÁ„o
+		//Testando aplica√ß√£o
 		
 		
 		//Inicializa dados mockados
@@ -83,20 +83,20 @@ public class Application {
 		//MeetingController.checkInMemberOnMeeting(MemberController.getMemberList().get(4).getId(), 10);
 		//MeetingController.checkInMemberOnMeeting(MemberController.getMemberList().get(4).getId(), 11);
 		
-		//Imprime todas as reuniıes criadas
-		System.out.println("\n\nImprime todas as reuniıes criadas:\n");
+		//Imprime todas as reuni√µes criadas
+		System.out.println("\n\nImprime todas as reuni√µes criadas:\n");
 		for (Meeting meeting: MeetingController.getMeetingList()) {
 			System.out.println(meeting.toString());
 		}
 		
 		
-		System.out.println("\n\n\nReuniıes de Janeiro a dezembro:");
+		System.out.println("\n\n\nReuni√µes de Janeiro a dezembro:");
 		Double a = AttendanceService.calculateAttendanceRate(MemberController.getMemberList().get(4).getId(), YearMonth.of(2022, 1),YearMonth.of(2022, 12));
-		System.out.println("Taxa de presenÁa: "+a*100+"%");
+		System.out.println("Taxa de presen√ßa: "+a*100+"%");
 		
-		System.out.println("\n\n\nReuniıes de Janeiro a Maio");
+		System.out.println("\n\n\nReuni√µes de Janeiro a Maio");
 		Double b = AttendanceService.calculateAttendanceRate(MemberController.getMemberList().get(4).getId(), YearMonth.of(2022, 1),YearMonth.of(2022, 5));
-		System.out.println("Taxa de presenÁa: "+b*100+"%");
+		System.out.println("Taxa de presen√ßa: "+b*100+"%");
 
 	}
 

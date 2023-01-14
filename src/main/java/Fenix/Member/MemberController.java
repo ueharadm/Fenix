@@ -46,7 +46,7 @@ public class MemberController {
 
 	//Code before Spring Boot
 	private static List<Member> memberList= new ArrayList<>();
-	private static final String MISSING_LODGE_MESSAGE = "Id da loja n„o cadastrada no sistema";
+	private static final String MISSING_LODGE_MESSAGE = "Id da loja n√£o cadastrada no sistema";
 
 	public static void createNewMember(Integer id, String name, Integer degree, Integer lodge, LocalDate birthDate, LocalDate initiationDate) {
 		try {
