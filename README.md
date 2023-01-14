@@ -1,5 +1,5 @@
 
-# Fenix - Masonic lodge software 📝  
+# Fenix - Meeting attendance control 📝  
  
 
 ## Developer goals 🚀  
