@@ -1,5 +1,5 @@
 
-# Fenix - Masonic lodge software 📝  
+# Fenix - Meeting attendance control 📝  
  
 
 ## Developer goals 🚀  
@@ -11,3 +11,4 @@ Attendance control software designed to help a Masonic lodge to calculate attend
 ### Stack: 📝
 - Java 17
 - Spring Boot
+- PostgreSQL
