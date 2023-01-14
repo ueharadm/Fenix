@@ -1,16 +1,10 @@
 package Fenix.Member;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.time.LocalDate;
+import java.util.Optional;
 
-import Fenix.Lodge.LodgeController;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/member")
@@ -21,8 +15,29 @@ public class MemberController {
 	private final MemberService memberService;
 
 	@PostMapping
-	public void addMember(@RequestBody NewMemberRequest request){
+	public void addMember(@RequestBody MemberRequest request){
+
 		memberService.createMember(request);
+	}
+
+	@GetMapping
+	public List<Member> gettAll(){
+		return memberService.getAllMembers();
+	}
+
+	@GetMapping("{memberId}")
+	public Optional<Member> fetchMember(@PathVariable("memberId") Integer memberId){
+		return memberService.fetchMember(memberId);
+	}
+
+	@DeleteMapping("{memberId}")
+	public void deleteMember(@PathVariable("memberId") Integer memberId){
+		memberService.deleteMemberById(memberId);
+	}
+
+	@PutMapping("{memberId}")
+	public void updateMember(@PathVariable("memberId") Integer memberId,@RequestBody MemberRequest request){
+		memberService.updateMember(memberId, request);
 	}
 }
 
