@@ -1,21 +1,46 @@
 package Fenix.Meeting;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-import Fenix.Member.Member;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/meeting")
+@AllArgsConstructor
 public class MeetingController {
-	
+	private final MeetingService meetingService;
+
+	@PostMapping
+	public void addMeeting(@RequestBody MeetingRequest request){
+
+		meetingService.createMeeting(request);
+	}
+
+	@GetMapping
+	public List<Meeting> gettAll(){
+		return meetingService.getAllMeetings();
+	}
+
+	@GetMapping("{meetingId}")
+	public Optional<Meeting> fetchMeeting(@PathVariable("meetingId") Integer meetingId){
+		return meetingService.fetchMeeting(meetingId);
+	}
+
+	@DeleteMapping("{meetingId}")
+	public void deleteMeeting(@PathVariable("meetingId") Integer meetingId){
+		meetingService.deleteMeetingById(meetingId);
+	}
+
+	@PutMapping("{meetingId}")
+	public void updateMeeting(@PathVariable("meetingId") Integer meetingId,@RequestBody MeetingRequest request){
+		meetingService.updateMeeting(meetingId, request);
+	}
+}
+
+	/*
+	//TODO: código anterior ao Spring Boot
+
 	private static List<Meeting> meetingList = new ArrayList<Meeting>();
 	private static Integer lastUid = 0;
 	
@@ -29,7 +54,7 @@ public class MeetingController {
 		lastUid = newLastUid;
 	}
 	
-	public static void insertMemberListIntoMeeting(ArrayList<Member> memberList) {
+	public static void insertmeetingListIntoMeeting(ArrayList<meeting> meetingList) {
 		
 	}
 	
@@ -60,12 +85,13 @@ public class MeetingController {
 		return meetingList.get(getIndexOfLastMeeting());
 	}
 	
-	public static void checkInMemberByIdOnLastMeeting (Integer memberId) {
-		meetingList.get(getIndexOfLastMeeting()).getPresentMemberIds().add(memberId);
+	public static void checkInmeetingByIdOnLastMeeting (Integer meetingId) {
+		meetingList.get(getIndexOfLastMeeting()).getPresentmeetingIds().add(meetingId);
 	}
 	
-	public static void checkInMemberOnMeeting (Integer memberId, Integer meetingId) {
-		meetingList.get(getIndexOfMeeting(meetingId)).getPresentMemberIds().add(memberId);
+	public static void checkInmeetingOnMeeting (Integer meetingId, Integer meetingId) {
+		meetingList.get(getIndexOfMeeting(meetingId)).getPresentmeetingIds().add(meetingId);
 		
 	}
 }
+*/

@@ -6,12 +6,12 @@ import java.time.LocalDate;
 
 
 @Entity
+@NoArgsConstructor
 @Getter
 @Setter
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
-@NoArgsConstructor
 public class Member {
 
 	@Id
