@@ -1,9 +1,5 @@
 package Fenix.Lodge;
 
-public class LodgeRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
 
-	public static void populateLodgeList() {
-		LodgeController.createNewLodge("Fenix");
-		LodgeController.createNewLodge("Amor e Justiça");		
-	}
-}
+public interface LodgeRepository extends JpaRepository<Lodge, Integer> {}

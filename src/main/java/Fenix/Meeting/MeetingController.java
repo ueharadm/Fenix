@@ -39,7 +39,7 @@ public class MeetingController {
 }
 
 	/*
-	//TODO: código anterior ao Spring Boot
+	//TODO: Limpar código anterior ao Spring Boot
 
 	private static List<Meeting> meetingList = new ArrayList<Meeting>();
 	private static Integer lastUid = 0;

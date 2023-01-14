@@ -3,15 +3,25 @@ package Fenix.Lodge;
 import jakarta.persistence.*;
 import lombok.*;
 
+@Entity
+@NoArgsConstructor
 @Getter
 @Setter
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
-@Entity
-@NoArgsConstructor
 public class Lodge {
 	@Id
-	private Integer lodgeId;
-	private String lodgeName;
+	@SequenceGenerator(
+			name = "lodge_sequence",
+			sequenceName = "lodge_sequence",
+			allocationSize = 1
+	)
+	@GeneratedValue(
+			strategy = GenerationType.SEQUENCE,
+			generator = "lodge_sequence"
+	)
+	private Integer id;
+	private String name;
+	private Integer register;
 }
