@@ -2,68 +2,72 @@ package Fenix.Attendance;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import Fenix.Meeting.Meeting;
+import Fenix.Meeting.MeetingService;
+import Fenix.Meeting.MeetingType;
+import Fenix.Member.Member;
+import Fenix.Member.MemberService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
 public class AttendanceService {
-    //List<Meeting> meetingList = meetingController.gettAll();
 
-    public List<Meeting> getMeetingsByDate(LocalDate InitDate, LocalDate finalDate){
+    private final MeetingService meetingService;
+    private final MemberService memberService;
+
+    /*public List<Meeting> getMeetingsByDate(LocalDate InitDate, LocalDate finalDate){
         return null;
+    }*/
+
+    public AttendanceResponse calculateAttendanceRate(AttendanceRateRequest request) {
+
+        switch(request.getRule()){
+            case GENERAL:
+                return generalAttendanceRate(request);
+            case REDEEMED:
+                redeemedAttendanceRate();
+            case OFFICER:
+                officerAttendanceRate();
+            default:
+                throw new UnsupportedOperationException("Rule must be GENERAL, REDEEMED or OFFICER\nRule: "+ request.getRule().toString());
+        }
+
+
+
+    }
+
+    private void officerAttendanceRate() {
+        //TODO: yet to be implemented
+    }
+
+    private void redeemedAttendanceRate() {
+        //TODO: yet to be implemented
+    }
+
+    public AttendanceResponse generalAttendanceRate (AttendanceRateRequest request){
+
+        AttendanceResponse response = new AttendanceResponse();
+        Member member = memberService.fetchMember(request.getMemberId()).get();
+
+        List<Meeting> meetings = meetingService.filterMeetingsByDegree(
+                memberService.latestDateOrInitiationDate(member.getId(),request.getInitDate()),
+                memberService.latestDateOrInitiationDate(member.getId(),request.getFinalDate()),
+                MeetingType.valueOf(member.getDegree().toString()));
+        long totalMeetings = meetings.stream().count();
+
+        List<Meeting> attendedMeetings = meetings.stream()
+                .filter(meeting -> meeting.getPresentMemberIds().contains(request.getMemberId()))
+                .collect(Collectors.toList());
+        long totalAttendedMeetings = attendedMeetings.stream().count();
+
+        response.setAttendanceRate((double)totalAttendedMeetings/(double)totalMeetings);
+        response.setTotalMeetings(totalMeetings);
+        response.setTotalAttendedMeetings(totalAttendedMeetings);
+        response.setAttendedMeetings(attendedMeetings);
+        return response;
     }
 }
-
-    /*
-
-
-    private final MeetingController meetingController;
-    private final MemberController memberController;
-    private final LodgeController lodgeController;
-
-    public long  attendedMeetingsOfMemberOnTimeBox(Integer memberId, YearMonth initYearMonth, YearMonth finalYearMonth) {
-    	 List<Meeting> meetingList = meetingController.gettAll();
-         
-    	 Set<Meeting> attendedMeetings = new LinkedHashSet<Meeting>();
-    	 
-    	 Iterator<Meeting> iterator = meetingList.iterator();
-    	 
-         long attendedMeetingsCount = 0;
-         
-         while(iterator.hasNext()) {
-        	 Meeting meeting = iterator.next();
-        	 Integer meetingMonth = meeting.getDate().getMonth().getValue();
-        	 Integer meetingYear = meeting.getDate().getYear();
-        	 if(meeting.getPresentMemberIds().contains(MemberController.getMemberById(memberId).getId()) &&
-        			 LocalDateHelper.isinBetweenDates(meeting.getDate(), initYearMonth, finalYearMonth)) {
-        		 attendedMeetings.add(meeting);
-        		 attendedMeetingsCount++;
-        	 }
-         }
-         System.out.println(attendedMeetings.toString());
-         return attendedMeetingsCount;
-    }
-    
-    private static long totalMeetingsOnTimeBox(YearMonth initYearMonth, YearMonth finalYearMonth) {
-    	 List<Meeting> meetingList = meetingController.getMeetingList();
-         
-         long totalMeetingsOnTimeBox = meetingList.stream()
-             .filter( meeting -> {
-                 //int monthValue = Month.from(meeting.getDate() ).getValue();
-                 //return (initYearMonth.getMonthValue() <= monthValue && finalYearMonth.getMonthValue() >= monthValue);
-                 return (LocalDateHelper.isinBetweenDates(meeting.getDate(), initYearMonth, finalYearMonth));
-             }).count();
-    	
-         return totalMeetingsOnTimeBox;
-    }
-    
-    public static Double calculateAttendanceRate(Integer memberId, YearMonth initYearMonth, YearMonth finalYearMonth) {
-    	System.out.println("CalculateAttendanceRate: Member " + memberId);
-    	//System.out.println("Teste: "+ ((double)attendedMeetingsOfMemberOnTimeBox(memberId, initMonth, finalMonth)/(double)totalMeetingsOnTimeBox(initMonth,finalMonth)*100)+"%");
-        return ((double)attendedMeetingsOfMemberOnTimeBox(memberId, initYearMonth, finalYearMonth)/(double)totalMeetingsOnTimeBox(initYearMonth,finalYearMonth));
-    }
-
-}*/

@@ -1,4 +1,4 @@
-package LocalDate;
+package Fenix.LocalDate;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -17,4 +17,10 @@ public class LocalDateHelper {
 	public static YearMonth toYearMonth (LocalDate date) {
 		return YearMonth.of(date.getYear(), date.getMonthValue());
 	}
+
+	public static LocalDate returnLatest(LocalDate date1, LocalDate date2 ){
+			return (date1.compareTo(date2)>0) ? date1 : date2;
+
+	}
 }
+

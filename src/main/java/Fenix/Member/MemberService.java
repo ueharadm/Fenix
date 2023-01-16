@@ -1,7 +1,9 @@
 package Fenix.Member;
 
+import Fenix.LocalDate.LocalDateHelper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,5 +52,10 @@ public class MemberService {
 
 	public boolean memberExists(Integer memberId){
 		return memberRepository.findById(memberId).isPresent();
+	}
+
+	public LocalDate latestDateOrInitiationDate(Integer memberId, LocalDate date){
+		LocalDate initiationDate = memberRepository.findById(memberId).get().getInitiationDate();
+		return LocalDateHelper.returnLatest(initiationDate,date);
 	}
 }
