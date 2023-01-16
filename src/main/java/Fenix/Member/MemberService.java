@@ -47,4 +47,8 @@ public class MemberService {
 	public Optional<Member> fetchMember(Integer memberId) {
 		return memberRepository.findById(memberId);
 	}
+
+	public boolean memberExists(Integer memberId){
+		return memberRepository.findById(memberId).isPresent();
+	}
 }

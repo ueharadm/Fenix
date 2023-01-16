@@ -1,27 +1,31 @@
 package Fenix.Attendance;
 
-import java.time.Month;
-import java.time.YearMonth;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
 import Fenix.Meeting.Meeting;
-import Fenix.Meeting.MeetingController;
-import Fenix.Meeting.MeetingType;
-import Fenix.Member.MemberController;
-import LocalDate.LocalDateHelper;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
+@Service
+@AllArgsConstructor
 public class AttendanceService {
-   /* private static MeetingController meetingController;
+    //List<Meeting> meetingList = meetingController.gettAll();
 
-    static{
-        meetingController = new MeetingController();
+    public List<Meeting> getMeetingsByDate(LocalDate InitDate, LocalDate finalDate){
+        return null;
     }
-    
-    private static long  attendedMeetingsOfMemberOnTimeBox(Integer memberId, YearMonth initYearMonth, YearMonth finalYearMonth) {
-    	 List<Meeting> meetingList = MeetingController.getMeetingList();
+}
+
+    /*
+
+
+    private final MeetingController meetingController;
+    private final MemberController memberController;
+    private final LodgeController lodgeController;
+
+    public long  attendedMeetingsOfMemberOnTimeBox(Integer memberId, YearMonth initYearMonth, YearMonth finalYearMonth) {
+    	 List<Meeting> meetingList = meetingController.gettAll();
          
     	 Set<Meeting> attendedMeetings = new LinkedHashSet<Meeting>();
     	 
@@ -61,5 +65,5 @@ public class AttendanceService {
     	//System.out.println("Teste: "+ ((double)attendedMeetingsOfMemberOnTimeBox(memberId, initMonth, finalMonth)/(double)totalMeetingsOnTimeBox(initMonth,finalMonth)*100)+"%");
         return ((double)attendedMeetingsOfMemberOnTimeBox(memberId, initYearMonth, finalYearMonth)/(double)totalMeetingsOnTimeBox(initYearMonth,finalYearMonth));
     }
-*/
-}
+
+}*/

@@ -1,24 +1,5 @@
 package Fenix;
 
-import java.time.LocalDateTime;
-import java.time.Month;
-import java.time.YearMonth;
-import java.util.ArrayList;
-import java.util.List;
-
-import Fenix.Attendance.AttendanceService;
-import Fenix.Lodge.Lodge;
-import Fenix.Lodge.LodgeController;
-import Fenix.Lodge.LodgeRepository;
-import Fenix.Meeting.Meeting;
-import Fenix.Meeting.MeetingController;
-import Fenix.Meeting.MeetingRepository;
-import Fenix.Meeting.MeetingType;
-import Fenix.Member.Member;
-import Fenix.Member.MemberController;
-import Fenix.Member.MemberRepository;
-import Fenix.Member.Registration.RegistrationController;
-import Fenix.Member.Registration.RegistrationService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
