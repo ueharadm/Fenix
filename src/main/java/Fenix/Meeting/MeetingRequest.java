@@ -17,5 +17,5 @@ public class MeetingRequest {
     @Enumerated(EnumType.STRING)
     private MeetingType type;
     private LocalDate date;
-    private Set<Integer> presentMemberIds;
+    private Set<Integer> AttendeesIds;
 }

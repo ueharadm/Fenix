@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import Fenix.Member.Member;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -33,13 +32,13 @@ public class Meeting {
 	@Enumerated(EnumType.STRING)
 	private MeetingType type;
 	private LocalDate date; 
-	private Set<Integer> presentMemberIds;
+	private Set<Integer> AttendeesIds;
 
 	public Meeting( Integer number, Integer worshipfulMasterId, MeetingType type, LocalDate date) {
 		this.number = number;
 		this.worshipfulMasterId = worshipfulMasterId;
 		this.type = type;
 		this.date = date;
-		this.presentMemberIds = new LinkedHashSet<Integer>();
+		this.AttendeesIds = new LinkedHashSet<Integer>();
 	}
 }

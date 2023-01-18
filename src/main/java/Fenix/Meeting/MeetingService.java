@@ -22,7 +22,7 @@ public class MeetingService {
         meeting.setWorshipfulMasterId(request.getWorshipfulMasterId());
         meeting.setType(request.getType());
         meeting.setDate(request.getDate());
-        meeting.setPresentMemberIds(request.getPresentMemberIds());
+        meeting.setAttendeesIds(request.getAttendeesIds());
         meetingRepository.save(meeting);
     }
 
@@ -45,7 +45,7 @@ public class MeetingService {
         meeting.setWorshipfulMasterId(request.getWorshipfulMasterId());
         meeting.setType(request.getType());
         meeting.setDate(request.getDate());
-        meeting.setPresentMemberIds(request.getPresentMemberIds());
+        meeting.setAttendeesIds(request.getAttendeesIds());
         meetingRepository.save(meeting);
     }
 
@@ -66,7 +66,7 @@ public class MeetingService {
         if(memberService.memberExists(memberId)){
             Meeting meeting = new Meeting();
             meeting = meetingRepository.findById(meetingId).orElse(new Meeting());
-            meeting.getPresentMemberIds().add(memberId);
+            meeting.getAttendeesIds().add(memberId);
             meetingRepository.save(meeting);
             return meeting.getNumber()==null
                     ? ("Não foi possível localizar a reunião: "+meetingId)

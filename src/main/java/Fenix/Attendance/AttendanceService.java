@@ -1,6 +1,5 @@
 package Fenix.Attendance;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -70,7 +69,7 @@ public class AttendanceService {
         long totalMeetings = meetings.stream().count();
 
         List<Meeting> attendedMeetings = meetings.stream()
-                .filter(meeting -> meeting.getPresentMemberIds().contains(request.getMemberId()))
+                .filter(meeting -> meeting.getAttendeesIds().contains(request.getMemberId()))
                 .collect(Collectors.toList());
         long totalAttendedMeetings = attendedMeetings.stream().count();
 
