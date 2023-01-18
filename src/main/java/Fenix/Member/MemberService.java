@@ -23,6 +23,7 @@ public class MemberService {
 		member.setLodge(request.getLodge());
 		member.setBirthDate(request.getBirthDate());
 		member.setInitiationDate(request.getInitiationDate());
+		member.setRedeemed(request.isRedeemed());
 		memberRepository.save(member);
 	}
 
@@ -43,6 +44,7 @@ public class MemberService {
 		member.setBirthDate(request.getBirthDate());
 		member.setInitiationDate(request.getInitiationDate());
 		member.setRegistration(request.getRegistration());
+		member.setRedeemed(request.isRedeemed());
 		memberRepository.save(member);
 	}
 

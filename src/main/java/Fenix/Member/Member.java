@@ -32,19 +32,17 @@ public class Member {
 	private Integer lodge;
 	private LocalDate birthDate;
 	private LocalDate initiationDate;
-	//private String phoneNumber;
-	//private String adress;
-	//private String cpf;
-	//private String email;
+	private boolean isRedeemed;
 
 
-	public Member(String name, Long registration, MemberDegree degree, Integer lodge, LocalDate birthDate, LocalDate initiationDate) {
+	public Member(String name, Long registration, MemberDegree degree, Integer lodge, LocalDate birthDate, LocalDate initiationDate, boolean isRedeemed) {
 		this.name = name;
 		this.registration = registration;
 		this.degree = degree;
 		this.lodge = lodge;
 		this.birthDate = birthDate;
 		this.initiationDate = initiationDate;
+		this.isRedeemed = isRedeemed();
 	}
 }
 

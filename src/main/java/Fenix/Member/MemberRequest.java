@@ -17,4 +17,5 @@ public class MemberRequest {
     private Integer lodge;
     private LocalDate birthDate;
     private LocalDate initiationDate;
+    private boolean isRedeemed;
 }

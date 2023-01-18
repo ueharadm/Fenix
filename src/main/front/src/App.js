@@ -4,7 +4,7 @@ import RegisterMember from './components/RegisterMember'
 function App() {
   return (
     <div>
-      <h1>My App</h1>
+      <h1>Member register:</h1>
       <RegisterMember />
     </div>
   )
