@@ -1,6 +1,7 @@
 package Fenix.Attendance;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,31 +26,40 @@ public class AttendanceService {
 
     public AttendanceResponse calculateAttendanceRate(AttendanceRateRequest request) {
 
+        //TODO: implement 1 year rule for general and 2 year rule for redeemed, for the time being the user must give initDate and finalDate
         switch(request.getRule()){
             case GENERAL:
                 return generalAttendanceRate(request);
             case REDEEMED:
-                redeemedAttendanceRate();
+                return redeemedAttendanceRate(request);
             case OFFICER:
-                officerAttendanceRate();
+                return officerAttendanceRate(request);
             default:
                 throw new UnsupportedOperationException("Rule must be GENERAL, REDEEMED or OFFICER\nRule: "+ request.getRule().toString());
         }
-
-
-
     }
 
-    private void officerAttendanceRate() {
-        //TODO: yet to be implemented
+
+    private AttendanceResponse officerAttendanceRate(AttendanceRateRequest request) {
+        //Officers are exempted from Attendance on lodge meetings
+        AttendanceResponse response=new AttendanceResponse();
+        response.setAttendanceRate(1.0);
+        response.setTotalMeetings(0);
+        response.setTotalAttendedMeetings(0);
+        response.setAttendedMeetings(new ArrayList<Meeting>());
+        return response;
     }
 
-    private void redeemedAttendanceRate() {
-        //TODO: yet to be implemented
+
+    private AttendanceResponse redeemedAttendanceRate(AttendanceRateRequest request) {
+        //MVP: User must give the initDate and finalDate for accounting period
+        //TODO: implement a 2-year accounting period for members with age>60, masonYears>25 and hasRedeemedBadge()
+        return generalAttendanceRate(request);
     }
 
     public AttendanceResponse generalAttendanceRate (AttendanceRateRequest request){
-
+        //MVP: User must give the initDate and finalDate for accounting period
+        //TODO: implement a 1-year accounting period from the closure of the previous month
         AttendanceResponse response = new AttendanceResponse();
         Member member = memberService.fetchMember(request.getMemberId()).get();
 
