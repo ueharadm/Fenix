@@ -12,6 +12,7 @@ Attendance control software designed to help a Masonic lodge to calculate attend
 - Java 17
 - Spring Boot
 - PostgreSQL
+- React
 
 ## Next Steps
 - <s>Basic CRUD without validations for Member
