@@ -1,15 +1,10 @@
 package Fenix.Meeting;
 
-import Fenix.Member.Member;
-import Fenix.Member.MemberRepository;
-import Fenix.Member.MemberRequest;
 import Fenix.Member.MemberService;
 import lombok.AllArgsConstructor;
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -24,6 +19,7 @@ public class MeetingService {
     public void createMeeting(MeetingRequest request) {
         Meeting meeting = new Meeting();
         meeting.setNumber(request.getNumber());
+        meeting.setWorshipfulMasterId(request.getWorshipfulMasterId());
         meeting.setType(request.getType());
         meeting.setDate(request.getDate());
         meeting.setPresentMemberIds(request.getPresentMemberIds());
@@ -46,6 +42,7 @@ public class MeetingService {
         Meeting meeting = new Meeting();
         meeting.setId(meetingId);
         meeting.setNumber(request.getNumber());
+        meeting.setWorshipfulMasterId(request.getWorshipfulMasterId());
         meeting.setType(request.getType());
         meeting.setDate(request.getDate());
         meeting.setPresentMemberIds(request.getPresentMemberIds());
@@ -68,11 +65,14 @@ public class MeetingService {
     public String checkInMember(Integer meetingId, Integer memberId) {
         if(memberService.memberExists(memberId)){
             Meeting meeting = new Meeting();
-            meeting = meetingRepository.findById(meetingId).get();
+            meeting = meetingRepository.findById(meetingId).orElse(new Meeting());
             meeting.getPresentMemberIds().add(memberId);
             meetingRepository.save(meeting);
-            return "Membero ID:"+memberId+" inserido na reunião "+meetingId;
+            return meeting.getNumber()==null
+                    ? ("Não foi possível localizar a reunião: "+meetingId)
+                    : ("Member ID:"+memberId+" inserido na reunião "+meetingId);
         }
+
         return "Membro ID:"+memberId+" não cadastrado";
     }
 }

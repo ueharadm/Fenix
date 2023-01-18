@@ -13,6 +13,7 @@ import java.util.Set;
 public class MeetingRequest {
 
     private Integer number;
+    private Integer worshipfulMasterId;
     @Enumerated(EnumType.STRING)
     private MeetingType type;
     private LocalDate date;
