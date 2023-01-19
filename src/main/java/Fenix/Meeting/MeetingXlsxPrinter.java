@@ -63,24 +63,11 @@ public class MeetingXlsxPrinter {
         headerCell.setCellValue("Dt. Nascimento");
         headerCell = headerRow3.createCell(5);
         headerCell.setCellValue("Dt. Iniciação");
+
         // Fill the rows with data
-        int rowNum = 3;
+        int rowNum = 4;
         for (Member member : meeting.getAttendees()) {
-            System.out.println(meeting.getAttendees());
-            //TODO: change Atendees to members and create the FK btw meeting and Member
-            XSSFRow dataRow = sheet.createRow(rowNum++);
-            XSSFCell dataCell = dataRow.createCell(0);
-            dataCell.setCellValue(member.getName());
-            dataCell = dataRow.createCell(1);
-            dataCell.setCellValue(member.getRegistration());
-            dataCell = dataRow.createCell(2);
-            dataCell.setCellValue(member.getDegree().toString());
-            dataCell = dataRow.createCell(3);
-            dataCell.setCellValue(member.getLodge());
-            dataCell = dataRow.createCell(4);
-            dataCell.setCellValue(member.getBirthDate().format(DateTimeFormatter.ISO_LOCAL_DATE));
-            dataCell = dataRow.createCell(5);
-            dataCell.setCellValue(member.getInitiationDate().format(DateTimeFormatter.ISO_LOCAL_DATE));
+            newMemberRow(sheet,rowNum++, member);
         }
 
         // Save the workbook to a file
@@ -108,23 +95,43 @@ public class MeetingXlsxPrinter {
         // Fill the rows with data
         int rowNum = 1;
         for (Meeting meeting : meetings) {
-            XSSFRow dataRow = sheet.createRow(rowNum++);
-            XSSFCell dataCell = dataRow.createCell(0);
-            dataCell.setCellValue(meeting.getNumber());
-            dataCell = dataRow.createCell(1);
-            dataCell.setCellValue(meeting.getWorshipfulMasterId());
-            dataCell = dataRow.createCell(2);
-            dataCell.setCellValue(meeting.getType().toString());
-            dataCell = dataRow.createCell(3);
-            dataCell.setCellValue(meeting.getDate().format(DateTimeFormatter.ISO_LOCAL_DATE));
-            dataCell = dataRow.createCell(4);
-            dataCell.setCellValue(meeting.getAttendees().stream().count());
+            newMeetingRow(sheet, rowNum++, meeting);
         }
 
         // Save the workbook to a file
         FileOutputStream fileOut = new FileOutputStream(fileName);
         workbook.write(fileOut);
         fileOut.close();
+    }
+
+    public static void newMeetingRow(XSSFSheet sheet, int rowNum, Meeting meeting){
+        XSSFRow dataRow = sheet.createRow(rowNum);
+        XSSFCell dataCell = dataRow.createCell(0);
+        dataCell.setCellValue(meeting.getNumber());
+        dataCell = dataRow.createCell(1);
+        dataCell.setCellValue(meeting.getWorshipfulMasterId());
+        dataCell = dataRow.createCell(2);
+        dataCell.setCellValue(meeting.getType().toString());
+        dataCell = dataRow.createCell(3);
+        dataCell.setCellValue(meeting.getDate().format(DateTimeFormatter.ISO_LOCAL_DATE));
+        dataCell = dataRow.createCell(4);
+        dataCell.setCellValue(meeting.getAttendees().stream().count());
+    }
+
+    public static void newMemberRow(XSSFSheet sheet, int rowNum, Member member){
+        XSSFRow dataRow = sheet.createRow(rowNum++);
+        XSSFCell dataCell = dataRow.createCell(0);
+        dataCell.setCellValue(member.getName());
+        dataCell = dataRow.createCell(1);
+        dataCell.setCellValue(member.getRegistration());
+        dataCell = dataRow.createCell(2);
+        dataCell.setCellValue(member.getDegree().toString());
+        dataCell = dataRow.createCell(3);
+        dataCell.setCellValue(member.getLodge());
+        dataCell = dataRow.createCell(4);
+        dataCell.setCellValue(member.getBirthDate().format(DateTimeFormatter.ISO_LOCAL_DATE));
+        dataCell = dataRow.createCell(5);
+        dataCell.setCellValue(member.getInitiationDate().format(DateTimeFormatter.ISO_LOCAL_DATE));
     }
 }
 

@@ -2,9 +2,13 @@ package Fenix.Meeting;
 
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import Fenix.Member.Member;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,7 +22,6 @@ import lombok.*;
 @Getter
 @Setter
 @AllArgsConstructor
-@EqualsAndHashCode
 @ToString
 public class Meeting {
 
@@ -39,17 +42,16 @@ public class Meeting {
 	private MeetingType type;
 	private LocalDate date;
 	@ManyToMany
-	@JoinTable(name = "member_meeting_table",
-	joinColumns = {
-			@JoinColumn(name = "member", referencedColumnName = "id")
-	})
-	private Set<Member> attendees;
+	@JoinTable(name = "member_meeting",
+			joinColumns = { @JoinColumn(name = "meeting_id")},
+			inverseJoinColumns = { @JoinColumn(name = "member_id")}
+	)
+	private List<Member> attendees;
 
 	public Meeting( Integer number, Integer worshipfulMasterId, MeetingType type, LocalDate date) {
 		this.number = number;
 		this.worshipfulMasterId = worshipfulMasterId;
 		this.type = type;
 		this.date = date;
-		this.attendees = new LinkedHashSet<Member>();
 	}
 }

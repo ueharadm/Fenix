@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -18,5 +19,5 @@ public class MeetingRequest {
     @Enumerated(EnumType.STRING)
     private MeetingType type;
     private LocalDate date;
-    private Set<Member> attendees;
+    private List<Member> attendees;
 }

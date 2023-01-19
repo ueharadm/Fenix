@@ -10,6 +10,7 @@ import java.nio.file.NoSuchFileException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,7 +32,11 @@ public class MeetingService {
     }
 
     public List<Meeting> getAllMeetings() {
-        return meetingRepository.findAll();
+        List<Meeting> meetings = meetingRepository.findAll();
+        for (Meeting meeting: meetings) {
+            System.out.println(meeting.getAttendees());
+        }
+        return meetings;
     }
 
     public Optional<Meeting> fetchMeeting(Integer meetingId) {
@@ -68,8 +73,7 @@ public class MeetingService {
 
     public String checkInMember(Integer meetingId, Integer memberId) {
         if(memberService.memberExists(memberId)){
-            Meeting meeting = new Meeting();
-            meeting = meetingRepository.findById(meetingId).orElse(new Meeting());
+            Meeting meeting = meetingRepository.findById(meetingId).orElse(new Meeting());
             meeting.getAttendees().add(memberService.fetchMember(memberId).orElse(new Member()));
             meetingRepository.save(meeting);
             return meeting.getNumber()==null
