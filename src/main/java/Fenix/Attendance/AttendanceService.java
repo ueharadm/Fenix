@@ -69,7 +69,7 @@ public class AttendanceService {
         long totalMeetings = meetings.stream().count();
 
         List<Meeting> attendedMeetings = meetings.stream()
-                .filter(meeting -> meeting.getAttendeesIds().contains(request.getMemberId()))
+                .filter(meeting -> meeting.getAttendees().contains(request.getMemberId()))
                 .collect(Collectors.toList());
         long totalAttendedMeetings = attendedMeetings.stream().count();
 

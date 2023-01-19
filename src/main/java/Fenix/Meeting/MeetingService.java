@@ -1,9 +1,12 @@
 package Fenix.Meeting;
 
+import Fenix.Member.Member;
+import Fenix.Member.MemberRepository;
 import Fenix.Member.MemberService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.nio.file.NoSuchFileException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +18,7 @@ public class MeetingService {
 
     private final MeetingRepository meetingRepository;
     private final MemberService memberService;
+    private final MemberRepository memberRepository;
 
     public void createMeeting(MeetingRequest request) {
         Meeting meeting = new Meeting();
@@ -22,7 +26,7 @@ public class MeetingService {
         meeting.setWorshipfulMasterId(request.getWorshipfulMasterId());
         meeting.setType(request.getType());
         meeting.setDate(request.getDate());
-        meeting.setAttendeesIds(request.getAttendeesIds());
+        meeting.setAttendees(request.getAttendees());
         meetingRepository.save(meeting);
     }
 
@@ -45,7 +49,7 @@ public class MeetingService {
         meeting.setWorshipfulMasterId(request.getWorshipfulMasterId());
         meeting.setType(request.getType());
         meeting.setDate(request.getDate());
-        meeting.setAttendeesIds(request.getAttendeesIds());
+        meeting.setAttendees(request.getAttendees());
         meetingRepository.save(meeting);
     }
 
@@ -66,7 +70,7 @@ public class MeetingService {
         if(memberService.memberExists(memberId)){
             Meeting meeting = new Meeting();
             meeting = meetingRepository.findById(meetingId).orElse(new Meeting());
-            meeting.getAttendeesIds().add(memberId);
+            meeting.getAttendees().add(memberService.fetchMember(memberId).orElse(new Member()));
             meetingRepository.save(meeting);
             return meeting.getNumber()==null
                     ? ("Não foi possível localizar a reunião: "+meetingId)
@@ -75,7 +79,30 @@ public class MeetingService {
 
         return "Membro ID:"+memberId+" não cadastrado";
     }
+
+    public String PrintAllMeetings(){
+        try{
+            List<Meeting> meetings = getAllMeetings();
+            MeetingXlsxPrinter.printMeetings(meetings, "TesteAllMeetings.xlsx");
+            return "Sucesso";
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String printMeeting(Integer meetingId, String fileName) {
+        try{
+            List<Meeting> meetings = getAllMeetings();
+            MeetingXlsxPrinter.printMeeting(meetingRepository.getReferenceById(meetingId), fileName+meetingId+".xlsx");
+            return "Sucesso";
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 }
+
+
 
     /*
 

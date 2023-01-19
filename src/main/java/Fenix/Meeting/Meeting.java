@@ -4,10 +4,16 @@ import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import Fenix.Member.Member;
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
+@Table(
+		name = "meeting",
+		uniqueConstraints = {
+		}
+)
 @NoArgsConstructor
 @Getter
 @Setter
@@ -31,14 +37,19 @@ public class Meeting {
 	private Integer worshipfulMasterId;
 	@Enumerated(EnumType.STRING)
 	private MeetingType type;
-	private LocalDate date; 
-	private Set<Integer> AttendeesIds;
+	private LocalDate date;
+	@ManyToMany
+	@JoinTable(name = "member_meeting_table",
+	joinColumns = {
+			@JoinColumn(name = "member", referencedColumnName = "id")
+	})
+	private Set<Member> attendees;
 
 	public Meeting( Integer number, Integer worshipfulMasterId, MeetingType type, LocalDate date) {
 		this.number = number;
 		this.worshipfulMasterId = worshipfulMasterId;
 		this.type = type;
 		this.date = date;
-		this.AttendeesIds = new LinkedHashSet<Integer>();
+		this.attendees = new LinkedHashSet<Member>();
 	}
 }

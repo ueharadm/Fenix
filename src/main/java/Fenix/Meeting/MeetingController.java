@@ -1,5 +1,6 @@
 package Fenix.Meeting;
 
+import java.nio.file.NoSuchFileException;
 import java.util.*;
 import java.time.LocalDate;
 
@@ -61,5 +62,16 @@ public class MeetingController {
 			msg += meetingService.checkInMember(meetingId, memberId) + "\n";
 		}
 		return msg;
+	}
+
+
+	@GetMapping("/printAll")
+	public String printAllMeetings() {
+		return meetingService.PrintAllMeetings();
+	}
+
+	@GetMapping("/print/{meetingId}")
+	public void printMeeting(@PathVariable("meetingId") Integer meetingId){
+		meetingService.printMeeting(meetingId, "TestMeeting");
 	}
 }
