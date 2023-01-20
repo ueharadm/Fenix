@@ -38,4 +38,9 @@ public class MemberController {
 	public void updateMember(@PathVariable("memberId") Integer memberId,@RequestBody MemberRequest request){
 		memberService.updateMember(memberId, request);
 	}
+
+	@PutMapping("/assignLodge/{memberId}")
+	public String assignLodge(@PathVariable("memberId") Integer memberId ,@RequestBody MemberRequest request){
+		return memberService.assignLodge(memberId, request.getLodgeId());
+	}
 }

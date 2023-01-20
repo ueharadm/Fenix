@@ -1,6 +1,8 @@
 package Fenix.Member;
 
 import Fenix.LocalDate.LocalDateHelper;
+import Fenix.Lodge.Lodge;
+import Fenix.Lodge.LodgeRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -10,9 +12,12 @@ import java.util.Optional;
 @Service
 public class MemberService {
 	private final MemberRepository memberRepository;
+	private final LodgeRepository lodgeRepository;
 
-	public MemberService(MemberRepository memberRepository) {
+	public MemberService(MemberRepository memberRepository,
+						 LodgeRepository lodgeRepository) {
 		this.memberRepository = memberRepository;
+		this.lodgeRepository = lodgeRepository;
 	}
 
 	public void createMember(MemberRequest request){
@@ -20,7 +25,10 @@ public class MemberService {
 		member.setName(request.getName());
 		member.setRegistration(request.getRegistration());
 		member.setDegree(request.getDegree());
-		member.setLodge(request.getLodge());
+		Optional<Lodge> lodge = request.getLodgeId()!= null? lodgeRepository.findById(request.getLodgeId()) : null;
+		if(lodge.isPresent() && lodge!=null){
+			member.setLodge(lodgeRepository.findById(request.getLodgeId()).get());
+		}
 		member.setBirthDate(request.getBirthDate());
 		member.setInitiationDate(request.getInitiationDate());
 		member.setRedeemed(request.isRedeemed());
@@ -40,7 +48,11 @@ public class MemberService {
 		member.setId(memberId);
 		member.setName(request.getName());
 		member.setDegree(request.getDegree());
-		member.setLodge(request.getLodge());
+		//TODO: change null for a better way to treat NPE
+		Optional<Lodge> lodge = request.getLodgeId()!= null? lodgeRepository.findById(request.getLodgeId()) : null;
+		if(lodge.isPresent() && lodge!=null){
+			member.setLodge(lodgeRepository.findById(request.getLodgeId()).get());
+		}
 		member.setBirthDate(request.getBirthDate());
 		member.setInitiationDate(request.getInitiationDate());
 		member.setRegistration(request.getRegistration());
@@ -60,4 +72,20 @@ public class MemberService {
 		LocalDate initiationDate = memberRepository.findById(memberId).get().getInitiationDate();
 		return LocalDateHelper.returnLatest(initiationDate,date);
 	}
+
+	public String assignLodge(Integer memberId, Integer lodgeId){
+		String msg ="";
+		Optional<Member> member = memberRepository.findById(memberId);
+		Optional<Lodge> lodge = lodgeRepository.findById(lodgeId);
+		msg += !member.isPresent() ? String.format("Não foi possível localizar o membro de ID: %d \n",memberId): "";
+		msg += !lodge.isPresent() ? String.format("Não foi possível localizar a Loja de ID: %d \n",lodgeId): "";
+		if(member.isPresent() && lodge.isPresent()){
+			member.get().setLodge(lodge.get());
+			msg = "Membro: "+member.get().getName()+" associado a loja: "+lodge.get().getName();
+		}
+		memberRepository.save(member.get());
+		return msg;
+	}
+
+
 }

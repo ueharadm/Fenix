@@ -57,7 +57,7 @@ public class AttendanceXlsxPrinter {
             dataCell = dataRow.createCell(2);
             dataCell.setCellValue(member.getDegree().toString());
             dataCell = dataRow.createCell(3);
-            dataCell.setCellValue(member.getLodge());
+            dataCell.setCellValue(member.getLodge().getName());
             dataCell = dataRow.createCell(4);
             dataCell.setCellValue(record.rate());
         }

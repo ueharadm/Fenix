@@ -38,7 +38,7 @@ public class MeetingXlsxPrinter {
         headerCell = headerRow1.createCell(2);
         headerCell.setCellValue(worshipfulMaster);
         headerCell = headerRow1.createCell(3);
-        headerCell.setCellValue(meeting.getWorshipfulMasterId());
+        headerCell.setCellValue(meeting.getWorshipfulMaster().getName());
 
         XSSFRow headerRow2 = sheet.createRow(1);
         headerCell = headerRow2.createCell(0);
@@ -109,7 +109,7 @@ public class MeetingXlsxPrinter {
         XSSFCell dataCell = dataRow.createCell(0);
         dataCell.setCellValue(meeting.getNumber());
         dataCell = dataRow.createCell(1);
-        dataCell.setCellValue(meeting.getWorshipfulMasterId());
+        dataCell.setCellValue(meeting.getWorshipfulMaster().getName());
         dataCell = dataRow.createCell(2);
         dataCell.setCellValue(meeting.getType().toString());
         dataCell = dataRow.createCell(3);
@@ -127,7 +127,7 @@ public class MeetingXlsxPrinter {
         dataCell = dataRow.createCell(2);
         dataCell.setCellValue(member.getDegree().toString());
         dataCell = dataRow.createCell(3);
-        dataCell.setCellValue(member.getLodge());
+        dataCell.setCellValue(member.getLodge().getName());
         dataCell = dataRow.createCell(4);
         dataCell.setCellValue(member.getBirthDate().format(DateTimeFormatter.ISO_LOCAL_DATE));
         dataCell = dataRow.createCell(5);

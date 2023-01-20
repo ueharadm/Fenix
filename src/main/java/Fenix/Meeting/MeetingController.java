@@ -4,8 +4,10 @@ import java.nio.file.NoSuchFileException;
 import java.util.*;
 import java.time.LocalDate;
 
+import Fenix.Exceptions.WorshipfulMasterNotFoundException;
 import Fenix.Member.MemberRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,9 +18,10 @@ public class MeetingController {
 	private final MemberRepository memberRepository;
 
 	@PostMapping
-	public void addMeeting(@RequestBody MeetingRequest request) {
+	public void addMeeting(@Validated @RequestBody MeetingRequest request) {
 
-		meetingService.createMeeting(request);
+		//meetingService.createMeeting(request);
+		throw new WorshipfulMasterNotFoundException(request.getWorshipfulMasterId());
 	}
 
 	@GetMapping
@@ -37,20 +40,20 @@ public class MeetingController {
 	}
 
 	@PutMapping("{meetingId}")
-	public void updateMeeting(@PathVariable("meetingId") Integer meetingId, @RequestBody MeetingRequest request) {
+	public void updateMeeting(@PathVariable("meetingId") Integer meetingId,@Validated @RequestBody MeetingRequest request) {
 		meetingService.updateMeeting(meetingId, request);
 	}
 
 	record FilterMeetingsRequest(LocalDate initDate, LocalDate finalDate) {
 	}
 	@PostMapping("/filter")
-	public List<Meeting> filterMeetingsByDate(@RequestBody FilterMeetingsRequest request) {
+	public List<Meeting> filterMeetingsByDate(@Validated @RequestBody FilterMeetingsRequest request) {
 		return meetingService.filterMeetings(request.initDate, request.finalDate);
 	}
 
 	record FilterMeetingsByDegreeRequest(LocalDate initDate, LocalDate finalDate, MeetingType meetingType) {}
 	@PostMapping("/filterByDegree")
-	public List<Meeting> filterMeetings(@RequestBody FilterMeetingsByDegreeRequest request) {
+	public List<Meeting> filterMeetings(@Validated @RequestBody FilterMeetingsByDegreeRequest request) {
 		return meetingService.filterMeetingsByDegree(request.initDate, request.finalDate, request.meetingType);
 	}
 

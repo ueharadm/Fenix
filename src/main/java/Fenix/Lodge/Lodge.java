@@ -1,7 +1,11 @@
 package Fenix.Lodge;
 
+import Fenix.Member.Member;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -24,4 +28,8 @@ public class Lodge {
 	private Integer id;
 	private String name;
 	private Integer register;
+	@ToString.Exclude
+	@JsonIgnore
+	@OneToMany(mappedBy = "lodge")
+	private List<Member> members;
 }

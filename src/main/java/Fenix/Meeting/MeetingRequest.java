@@ -1,6 +1,7 @@
 package Fenix.Meeting;
 
 import Fenix.Member.Member;
+import jakarta.annotation.Nonnull;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
@@ -14,10 +15,14 @@ import java.util.Set;
 @Getter
 public class MeetingRequest {
 
+    @Nonnull
     private Integer number;
+    @Nonnull
     private Integer worshipfulMasterId;
+    @Nonnull
     @Enumerated(EnumType.STRING)
     private MeetingType type;
+    @Nonnull
     private LocalDate date;
     private List<Member> attendees;
 }

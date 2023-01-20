@@ -37,7 +37,11 @@ public class Meeting {
 	)
 	private Integer id;
 	private Integer number;
-	private Integer worshipfulMasterId;
+	@ManyToOne
+	@JoinColumn(
+			name = "member_id"
+	)
+	private Member worshipfulMaster;
 	@Enumerated(EnumType.STRING)
 	private MeetingType type;
 	private LocalDate date;
@@ -47,11 +51,4 @@ public class Meeting {
 			inverseJoinColumns = { @JoinColumn(name = "member_id")}
 	)
 	private List<Member> attendees;
-
-	public Meeting( Integer number, Integer worshipfulMasterId, MeetingType type, LocalDate date) {
-		this.number = number;
-		this.worshipfulMasterId = worshipfulMasterId;
-		this.type = type;
-		this.date = date;
-	}
 }

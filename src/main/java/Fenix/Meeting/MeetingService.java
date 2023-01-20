@@ -1,5 +1,6 @@
 package Fenix.Meeting;
 
+import Fenix.Exceptions.WorshipfulMasterNotFoundException;
 import Fenix.Member.Member;
 import Fenix.Member.MemberRepository;
 import Fenix.Member.MemberService;
@@ -24,7 +25,13 @@ public class MeetingService {
     public void createMeeting(MeetingRequest request) {
         Meeting meeting = new Meeting();
         meeting.setNumber(request.getNumber());
-        meeting.setWorshipfulMasterId(request.getWorshipfulMasterId());
+        Optional<Member> member = memberRepository.findById(request.getWorshipfulMasterId());
+        System.out.println(!member.isPresent() ? String.format("Unable to find member with ID: %d \n",request.getWorshipfulMasterId()): "WorshipfulMaster assigned!");
+        if(member.isPresent()){
+            meeting.setWorshipfulMaster(member.get());
+        } else{
+            throw new WorshipfulMasterNotFoundException(request.getWorshipfulMasterId());
+        }
         meeting.setType(request.getType());
         meeting.setDate(request.getDate());
         meeting.setAttendees(request.getAttendees());
@@ -48,14 +55,16 @@ public class MeetingService {
     }
 
     public void updateMeeting(Integer meetingId, MeetingRequest request) {
+        String msg = "";
         Meeting meeting = new Meeting();
         meeting.setId(meetingId);
         meeting.setNumber(request.getNumber());
-        meeting.setWorshipfulMasterId(request.getWorshipfulMasterId());
-        meeting.setType(request.getType());
-        meeting.setDate(request.getDate());
-        meeting.setAttendees(request.getAttendees());
-        meetingRepository.save(meeting);
+        Optional<Member> member = memberRepository.findById(request.getWorshipfulMasterId());
+        System.out.println(!member.isPresent() ? String.format("Unable to find member with ID: %d \n",request.getWorshipfulMasterId()): "WorshipfulMaster assigned!");
+        if(member.isPresent()){
+            meeting.setWorshipfulMaster(member.get());
+        }
+        memberRepository.save(member.get());
     }
 
     public List<Meeting> filterMeetings(LocalDate initDate, LocalDate finalDate) {
@@ -105,16 +114,3 @@ public class MeetingService {
 
     }
 }
-
-
-
-    /*
-
-    public List<Member> getAllMembers(){
-        return memberRepository.findAll();
-    }
-
-
-
-}
-*/

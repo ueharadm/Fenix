@@ -1,5 +1,6 @@
 package Fenix.Member;
 
+import Fenix.Lodge.Lodge;
 import Fenix.Meeting.Meeting;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -35,7 +36,9 @@ public class Member {
 	private Long registration;
 	@Enumerated(EnumType.STRING)
 	private MemberDegree degree;
-	private Integer lodge;
+	@ManyToOne
+	@JoinColumn(name = "lodge_id")
+	private Lodge lodge;
 	private LocalDate birthDate;
 	private LocalDate initiationDate;
 	private boolean isRedeemed;
@@ -45,11 +48,10 @@ public class Member {
 	private List<Meeting> attendedMeetings;
 
 
-	public Member(String name, Long registration, MemberDegree degree, Integer lodge, LocalDate birthDate, LocalDate initiationDate, boolean isRedeemed) {
+	public Member(String name, Long registration, MemberDegree degree, LocalDate birthDate, LocalDate initiationDate, boolean isRedeemed) {
 		this.name = name;
 		this.registration = registration;
 		this.degree = degree;
-		this.lodge = lodge;
 		this.birthDate = birthDate;
 		this.initiationDate = initiationDate;
 		this.isRedeemed = isRedeemed();
