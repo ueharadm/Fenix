@@ -1,7 +1,13 @@
 package Fenix.Attendance;
 
+import Fenix.Member.Member;
+import Fenix.Member.MemberController;
+import Fenix.Member.MemberRepository;
 import lombok.AllArgsConstructor;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,9 +19,28 @@ import org.springframework.web.bind.annotation.RestController;
 public class AttendanceController {
 
     public final AttendanceService attendanceService;
+    private final MemberRepository memberRepository;
 
     @PostMapping
     public AttendanceResponse getAttendanceRate(@RequestBody AttendanceRateRequest request){
         return attendanceService.calculateAttendanceRate(request);
+    }
+
+    @PostMapping("/completeReport")
+    public void generateAttendanceReport(@RequestBody AttendanceRateRequest request) throws Exception{
+        try{
+            List<MemberAttendanceRecord> memberRates = new ArrayList<>();
+            List<Member> memberList = memberRepository.findAll();
+            for (Member member: memberList) {
+                double d = attendanceService.calculateAttendanceRate(request).getAttendanceRate();
+                AttendanceResponse response = attendanceService.calculateAttendanceRate(request);
+                memberRates.add(new MemberAttendanceRecord(member, attendanceService.calculateAttendanceRate(new AttendanceRateRequest(member.getId(),request.getInitDate(),request.getFinalDate(),AttendanceRule.GENERAL)).getAttendanceRate()));
+            }
+
+            AttendanceXlsxPrinter.generateReport(request.getInitDate(),request.getFinalDate(), memberRates);
+        } catch (Exception e){
+            System.err.println("Erro generateAttendanceReport");
+        }
+
     }
 }
