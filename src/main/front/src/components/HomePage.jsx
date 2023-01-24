@@ -10,6 +10,9 @@ function HomePage() {
     const handleMemberRegistration = () => {
       navigate("/member");
     }
+    const handleMembers = () => {
+      navigate("/members");
+    }
 
     const handleMeetingRegistration = () => {
       navigate("/meeting");
@@ -28,6 +31,7 @@ function HomePage() {
               <button style={{margin: "5px"}} onClick={handleMemberRegistration}>Cadastrar Membro</button>
               <button style={{margin: "5px"}} onClick={handleMeetingRegistration}>Cadastrar Reunião</button>
               <button style={{margin: "5px"}} onClick={handleAttendanceRequest}>Calcular Presenças</button>
+              <button style={{margin: "5px"}} onClick={handleMembers}>Calcular Presenças</button>
             </div>
             
         </div>

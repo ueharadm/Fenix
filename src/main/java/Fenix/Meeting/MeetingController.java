@@ -20,8 +20,8 @@ public class MeetingController {
 	@PostMapping
 	public void addMeeting(@Validated @RequestBody MeetingRequest request) {
 
-		//meetingService.createMeeting(request);
-		throw new WorshipfulMasterNotFoundException(request.getWorshipfulMasterId());
+		meetingService.createMeeting(request);
+		//throw new WorshipfulMasterNotFoundException(request.getWorshipfulMasterId());
 	}
 
 	@GetMapping

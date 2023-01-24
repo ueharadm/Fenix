@@ -5,6 +5,7 @@ import MeetingRegistration from './components/MeetingRegistration'
 import MemberRegistration from './components/MemberRegistration'
 import LodgeRegistration from './components/LodgeRegistration'
 import AttendanceReports from './components/AttendanceReports'
+import Members from './components/Member/Members'
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="/member/" element={<MemberRegistration />} />
         <Route path="/lodge/" element={<LodgeRegistration />} />
         <Route path="/attendance/" element={<AttendanceReports />} />
+        <Route path="/members/" element={<Members />} />
       </Routes>
     </Router>
   )
