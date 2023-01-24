@@ -1,24 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './Members.css';
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import './Members.css'
+import IconButton from '@mui/material/IconButton'
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 function Members() {
-  const [members, setMembers] = useState([]);
+  const [members, setMembers] = useState([])
 
   useEffect(() => {
     async function fetchMembers() {
       try {
-        const response = await axios.get('http://localhost:8080/api/v1/member');
-        setMembers(response.data);
+        const response = await axios.get('http://localhost:8080/api/v1/member')
+        setMembers(response.data)
       } catch (error) {
-        console.log(error);
+        console.log(error)
       }
     }
-    fetchMembers();
-  }, []);
+    fetchMembers()
+  }, [])
 
   return (
     <div>
+      <IconButton aria-label="delete">
+        <ArrowBackIosNewIcon />
+      </IconButton>
       <h1>Members</h1>
       <ul className="members-grid">
         {members.map(member => (
@@ -34,7 +39,7 @@ function Members() {
         ))}
       </ul>
     </div>
-  );
+  )
 }
 
-export default Members;
+export default Members

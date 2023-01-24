@@ -31,7 +31,7 @@ function HomePage() {
               <button style={{margin: "5px"}} onClick={handleMemberRegistration}>Cadastrar Membro</button>
               <button style={{margin: "5px"}} onClick={handleMeetingRegistration}>Cadastrar Reunião</button>
               <button style={{margin: "5px"}} onClick={handleAttendanceRequest}>Calcular Presenças</button>
-              <button style={{margin: "5px"}} onClick={handleMembers}>Calcular Presenças</button>
+              <button style={{margin: "5px"}} onClick={handleMembers}>Membros</button>
             </div>
             
         </div>
