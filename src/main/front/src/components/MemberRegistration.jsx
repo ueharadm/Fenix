@@ -1,6 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Container,
+  Typography,
+  IconButton,
+  TextField,
+  Box,
+  MenuItem,
+  Button,
+  Grid
+} from '@mui/material'
 
 function MemberRegistration() {
   const [name, setName] = useState('')
@@ -17,6 +35,21 @@ function MemberRegistration() {
   const handleHomePage = () => {
     navigate('/')
   }
+
+  const degrees = [
+    {
+      value: 'APRENDIZ',
+      label: 'APRENDIZ'
+    },
+    {
+      value: 'COMPANHEIRO',
+      label: 'COMPANHEIRO'
+    },
+    {
+      value: 'MESTRE',
+      label: 'MESTRE'
+    }
+  ]
 
   useEffect(() => {
     async function fetchLodges() {
@@ -59,51 +92,107 @@ function MemberRegistration() {
   }
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyItems: 'center',
-        alignContent: 'center',
-        gap: '1px',
-        alignSelf: 'center',
-        textAlign: 'start',
-        minHeight: '200px'
-      }}
-    >
-      <form
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          padding: '5px',
-          border: '2px solid black',
-          borderRadius: '10px'
-        }}
-        onSubmit={handleSubmit}
+    <Container maxWidth="lg">
+      <IconButton sx={{ margin: '1px solid' }} onClick={handleHomePage}>
+        <ArrowBackIosNewIcon />
+      </IconButton>
+      <Typography
+        variant="h1"
+        sx={{ my: 4, textAlign: 'center', color: 'primary.main' }}
       >
-        <h1 style={{ marginTop: '0px', marginBottom: '5px' }}>
-          <button
-            onClick={handleHomePage}
-            style={{
-              display: 'flex',
-              maxWidth: '30px',
-              maxHeight: '30px',
-              border: '1px solid #9A9595',
-              opacity: '1',
-              boxShadow: '3px 3px 2px black',
-              borderRadius: '30px',
-              minHeight: '30px',
-              minWidth: '30px',
-              justifyContent: 'center',
-              alignContent: 'center',
-              alignItems: 'center'
-            }}
-          >
-            &lt;
-          </button>
-          Novo membro:
-        </h1>
+        Novo membro
+      </Typography>
+      <Box
+        component="form"
+        sx={{
+          '& .MuiTextField-root': { m: 1, width: '25ch' }
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        <Grid container rowSpacing={3} columnSpacing={{ xs: 6, sm: 2, md: 3 }}>
+          <Grid item xs={12} sm={6} md={4} lg={3}>
+            <TextField required id="outlined-required" label="Nome" />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4} lg={3}>
+            <TextField
+              id="outlined-number"
+              label="Matrícula"
+              type="number"
+              InputLabelProps={{
+                shrink: true
+              }}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4} lg={3}>
+            <TextField
+              id="outlined-select-currency"
+              select
+              label="Grau"
+              defaultValue="APRENDIZ"
+            >
+              {degrees.map(option => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4} lg={3}>
+            <TextField id="outlined-select-currency" select label="Loja">
+              {lodges.map(lodge => (
+                <MenuItem key={lodge.value} value={lodge.value}>
+                  {lodge.label}
+                </MenuItem>
+              ))}
+            </TextField>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4} lg={3}>
+            <TextField
+              id="outlined-birth-date"
+              label="Data de nascimento"
+              type="date"
+              InputLabelProps={{
+                shrink: true
+              }}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4} lg={3}>
+            <TextField
+              id="outlined-initiation-date"
+              label="Data de iniciação"
+              type="date"
+              InputLabelProps={{
+                shrink: true
+              }}
+            />
+          </Grid>
+        </Grid>
+      </Box>
+
+      <Box
+        component="form"
+        sx={{
+          '& .MuiTextField-root': { m: 1, width: '25ch' },
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
+        noValidate
+        autoComplete="off"
+      ></Box>
+      <Box sx={{p: 2}}>
+        <Button variant="contained" onClick={handleSubmit}>
+          Registrar
+        </Button>
+      </Box>
+
+      <div style={{ height: '400px' }}></div>
+
+      <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+      <TextField id="filled-basic" label="Filled" variant="filled" />
+      <TextField id="standard-basic" label="Standard" variant="standard" />
+      <form onSubmit={handleSubmit}>
         <label>Nome completo:</label>
         <input
           type="text"
@@ -156,15 +245,8 @@ function MemberRegistration() {
         <button type="submit">Submit</button>
       </form>
       <br />
-    </div>
+    </Container>
   )
 }
 
 export default MemberRegistration
-/*
-<select value={lodge} onChange={e => setLodge(e.target.value)}>
-                <option>ImplementarGetLodge</option>
-                <option>Loja 01</option>
-                <option>Loja 02</option>
-                <option>Loja 03</option>
-            </select>*/

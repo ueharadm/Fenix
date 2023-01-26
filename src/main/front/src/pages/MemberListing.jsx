@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import IconButton from '@mui/material/IconButton'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
+import { useNavigate } from 'react-router-dom'
 import {
   Table,
   TableBody,
@@ -17,6 +18,12 @@ import {
 function Members() {
   const [members, setMembers] = useState([])
 
+  let navigate = useNavigate()
+
+  const handleHomePage = () => {
+    navigate('/')
+  }
+
   useEffect(() => {
     async function fetchMembers() {
       try {
@@ -31,7 +38,7 @@ function Members() {
 
   return (
     <Container>
-      <IconButton sx={{ margin: '1px solid' }}>
+      <IconButton sx={{ margin: '1px solid' }} onClick={handleHomePage}>
         <ArrowBackIosNewIcon />
       </IconButton>
       <Typography
