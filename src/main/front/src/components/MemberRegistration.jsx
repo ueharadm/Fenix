@@ -109,49 +109,70 @@ function MemberRegistration() {
         }}
         noValidate
         autoComplete="off"
+        onSubmit={handleSubmit}
       >
         <Grid container rowSpacing={3} columnSpacing={{ xs: 6, sm: 2, md: 3 }}>
           <Grid item xs={12} sm={6} md={4} lg={3}>
-            <TextField required id="outlined-required" label="Nome" />
+            <TextField
+              required
+              id="outlined-required"
+              label="Nome"
+              value={name}
+              onChange={e => setName(e.target.value)}
+            />
           </Grid>
           <Grid item xs={12} sm={6} md={4} lg={3}>
             <TextField
               id="outlined-number"
               label="Matrícula"
               type="number"
+              value={registration}
+              onChange={e => setRegistration(e.target.value)}
               InputLabelProps={{
                 shrink: true
               }}
             />
           </Grid>
+
           <Grid item xs={12} sm={6} md={4} lg={3}>
             <TextField
-              id="outlined-select-currency"
+              id="outlined-select-degree"
               select
               label="Grau"
               defaultValue="APRENDIZ"
+              onChange={e => setDegree(e.target.value)}
             >
-              {degrees.map(option => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
+              {degrees.map(degree => (
+                <MenuItem key={degree.value} value={degree.value}>
+                  {degree.label}
                 </MenuItem>
               ))}
             </TextField>
           </Grid>
+
           <Grid item xs={12} sm={6} md={4} lg={3}>
-            <TextField id="outlined-select-currency" select label="Loja">
+            <TextField
+              id="outlined-select-lodge"
+              select
+              label="Loja"
+              defaultValue="1"
+              onChange={e => setLodgeId(e.target.value)}
+            >
               {lodges.map(lodge => (
-                <MenuItem key={lodge.value} value={lodge.value}>
-                  {lodge.label}
+                <MenuItem key={lodge.id} value={lodge.id}>
+                  {lodge.name}
                 </MenuItem>
               ))}
             </TextField>
           </Grid>
+
           <Grid item xs={12} sm={6} md={4} lg={3}>
             <TextField
               id="outlined-birth-date"
               label="Data de nascimento"
               type="date"
+              value={birthDate}
+              onChange={e => setBirthDate(e.target.value)}
               InputLabelProps={{
                 shrink: true
               }}
@@ -162,6 +183,8 @@ function MemberRegistration() {
               id="outlined-initiation-date"
               label="Data de iniciação"
               type="date"
+              value={initiationDate}
+              onChange={e => setInitiationDate(e.target.value)}
               InputLabelProps={{
                 shrink: true
               }}
@@ -169,7 +192,6 @@ function MemberRegistration() {
           </Grid>
         </Grid>
       </Box>
-
       <Box
         component="form"
         sx={{
@@ -181,70 +203,11 @@ function MemberRegistration() {
         noValidate
         autoComplete="off"
       ></Box>
-      <Box sx={{p: 2}}>
+      <Box sx={{ p: 2 }}>
         <Button variant="contained" onClick={handleSubmit}>
           Registrar
         </Button>
       </Box>
-
-      <div style={{ height: '400px' }}></div>
-
-      <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-      <TextField id="filled-basic" label="Filled" variant="filled" />
-      <TextField id="standard-basic" label="Standard" variant="standard" />
-      <form onSubmit={handleSubmit}>
-        <label>Nome completo:</label>
-        <input
-          type="text"
-          value={name}
-          onChange={e => setName(e.target.value)}
-        />
-        <label>Matricula:</label>
-        <input
-          type="text"
-          value={registration}
-          onChange={e => setRegistration(e.target.value)}
-        />
-        <label>Grau:</label>
-        <select value={degree} onChange={e => setDegree(e.target.value)}>
-          <option key={1} value={'APRENDIZ'}>
-            Aprendiz
-          </option>
-          <option key={2} value={'COMPANHEIRO'}>
-            Companheiro
-          </option>
-          <option key={3} value={'MESTRE'}>
-            Mestre
-          </option>
-        </select>
-        <label>Loja:</label>
-        <select value={lodgeId} onChange={e => setLodgeId(e.target.value)}>
-          {lodges.length === 0 ? (
-            <option>Sem Loja cadastrada</option>
-          ) : (
-            lodges.map(lodge => (
-              <option key={lodge.id} value={lodge.id}>
-                {lodge.name}
-              </option>
-            ))
-          )}
-        </select>
-        <label>Data de nascimento:</label>
-        <input
-          type="date"
-          value={birthDate}
-          onChange={e => setBirthDate(e.target.value)}
-        />
-        <label>Data de iniciação:</label>
-        <input
-          type="date"
-          value={initiationDate}
-          onChange={e => setInitiationDate(e.target.value)}
-        />
-        <br />
-        <button type="submit">Submit</button>
-      </form>
-      <br />
     </Container>
   )
 }
