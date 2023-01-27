@@ -23,14 +23,31 @@ function HomePage() {
     navigate('/attendance')
   }
 
+  const handleLodges = () => {
+    navigate('/lodges')
+  }
+
+  const handleMeetings = () => {
+    navigate('/meetings')
+  }
+
   return (
     <Container>
-      <Typography variant='h1' sx={{my: 4, textAlign: "center", color: "primary.main"}}>
-      Controle de presença
+      <Typography
+        variant="h1"
+        sx={{ my: 4, textAlign: 'center', color: 'primary.main' }}
+      >
+        Controle de presença
       </Typography>
-      <Container sx={{display: "flex", flexDirection: "column", width: "25rem", gap: 2 }}>
-        
-      <Button variant="contained" onClick={handleLodgeRegistration}>
+      <Container
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          width: '25rem',
+          gap: 2
+        }}
+      >
+        <Button variant="contained" onClick={handleLodgeRegistration}>
           Cadastrar Loja
         </Button>
         <Button variant="contained" onClick={handleMemberRegistration}>
@@ -39,11 +56,17 @@ function HomePage() {
         <Button variant="contained" onClick={handleMeetingRegistration}>
           Cadastrar Reunião
         </Button>
-        <Button variant="contained" onClick={handleAttendanceRequest}>
-          Calcular Presenças
+        <Button variant="contained" onClick={handleLodges}>
+          Lojas
         </Button>
         <Button variant="contained" onClick={handleMembers}>
           Membros
+        </Button>
+        <Button variant="contained" onClick={handleMeetings}>
+          Reuniões
+        </Button>
+        <Button variant="contained" onClick={handleAttendanceRequest}>
+          Calcular Presenças
         </Button>
       </Container>
     </Container>

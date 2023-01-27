@@ -1,6 +1,17 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
+import {
+  Container,
+  Typography,
+  IconButton,
+  TextField,
+  Box,
+  MenuItem,
+  Button,
+  Grid
+} from '@mui/material'
 
 const LodgeRegistration = () => {
   const [name, setName] = useState('')
@@ -23,67 +34,55 @@ const LodgeRegistration = () => {
     navigate('/')
   }
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyItems: 'center',
-        alignContent: 'center',
-        gap: '1px',
-        alignSelf: 'center',
-        textAlign: 'start',
-        minHeight: '200px'
-      }}
-    >
-      <form
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          padding: '5px',
-          border: '2px solid black',
-          borderRadius: '10px'
+    <Container maxWidth="lg">
+      <IconButton sx={{ margin: '1px solid' }} onClick={handleHomePage}>
+        <ArrowBackIosNewIcon />
+      </IconButton>
+      <Typography
+        variant="h1"
+        sx={{ my: 4, textAlign: 'center', color: 'primary.main' }}
+      >
+        Nova Loja
+      </Typography>
+      <Box
+        component="form"
+        sx={{
+          '& .MuiTextField-root': { m: 1, width: '25ch' }
         }}
+        noValidate
+        autoComplete="off"
         onSubmit={handleSubmit}
       >
-        <h1 style={{ marginTop: '0px', marginBottom: '5px' }}>
-          <button
-            onClick={handleHomePage}
-            style={{
-              display: 'flex',
-              maxWidth: '30px',
-              maxHeight: '30px',
-              border: '1px solid #9A9595',
-              opacity: '1',
-              boxShadow: '3px 3px 2px black',
-              borderRadius: '30px',
-              minHeight: '30px',
-              minWidth: '30px',
-              justifyContent: 'center',
-              alignContent: 'center',
-              alignItems: 'center'
-            }}
-          >
-            &lt;
-          </button>
-          Nova Loja:
-        </h1>
-        <label>Nome:</label>
-        <input
-          type="text"
-          value={name}
-          onChange={e => setName(e.target.value)}
-        />
-        <label>Registro:</label>
-        <input
-          type="text"
-          value={register}
-          onChange={e => setRegister(e.target.value)}
-        />
-        <br />
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+        <Grid container rowSpacing={3} columnSpacing={{ xs: 6, sm: 2, md: 3 }}>
+          <Grid item xs={12} sm={6} md={4} lg={3}>
+            <TextField
+              required
+              id="outlined-required"
+              label="Nome"
+              value={name}
+              onChange={e => setName(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4} lg={3}>
+            <TextField
+              id="outlined-number"
+              label="Registro"
+              type="number"
+              value={register}
+              onChange={e => setRegister(e.target.value)}
+              InputLabelProps={{
+                shrink: true
+              }}
+            />
+          </Grid>
+        </Grid>
+      </Box>
+      <Box sx={{ p: 2 }}>
+        <Button variant="contained" onClick={handleSubmit}>
+          Registrar
+        </Button>
+      </Box>
+    </Container>
   )
 }
 

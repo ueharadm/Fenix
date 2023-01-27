@@ -6,6 +6,8 @@ import MemberRegistration from './components/MemberRegistration'
 import LodgeRegistration from './components/LodgeRegistration'
 import AttendanceReports from './components/AttendanceReports'
 import MemberListing from './pages/MemberListing'
+import LodgeListing from './pages/LodgeListing'
+import MeetingListing from './pages/MeetingListing'
 
 const App = () => {
   return (
@@ -17,6 +19,8 @@ const App = () => {
         <Route path="/lodge/" element={<LodgeRegistration />} />
         <Route path="/attendance/" element={<AttendanceReports />} />
         <Route path="/members/" element={<MemberListing />} />
+        <Route path="/lodges/" element={<LodgeListing />} />
+        <Route path="/meetings/" element={<MeetingListing />} />
       </Routes>
     </Router>
   )

@@ -3,13 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
   Container,
   Typography,
   IconButton,
