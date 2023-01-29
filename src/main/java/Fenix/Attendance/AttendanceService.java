@@ -27,11 +27,11 @@ public class AttendanceService {
 
         //TODO: implement 1 year rule for general and 2 year rule for redeemed, for the time being the user must give initDate and finalDate
         switch(request.getRule()){
-            case GENERAL:
+            case GERAL:
                 return generalAttendanceRate(request);
-            case REDEEMED:
+            case REMIDO:
                 return redeemedAttendanceRate(request);
-            case OFFICER:
+            case OFICIAL:
                 return officerAttendanceRate(request);
             default:
                 throw new UnsupportedOperationException("Rule must be GENERAL, REDEEMED or OFFICER\nRule: "+ request.getRule().toString());

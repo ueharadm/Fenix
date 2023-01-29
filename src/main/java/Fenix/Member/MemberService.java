@@ -32,6 +32,7 @@ public class MemberService {
 		member.setBirthDate(request.getBirthDate());
 		member.setInitiationDate(request.getInitiationDate());
 		member.setRedeemed(request.isRedeemed());
+		member.setAttendanceRule(request.getAttendanceRule());
 		memberRepository.save(member);
 	}
 
@@ -57,6 +58,7 @@ public class MemberService {
 		member.setInitiationDate(request.getInitiationDate());
 		member.setRegistration(request.getRegistration());
 		member.setRedeemed(request.isRedeemed());
+		member.setAttendanceRule(request.getAttendanceRule());
 		memberRepository.save(member);
 	}
 
@@ -77,8 +79,8 @@ public class MemberService {
 		String msg ="";
 		Optional<Member> member = memberRepository.findById(memberId);
 		Optional<Lodge> lodge = lodgeRepository.findById(lodgeId);
-		msg += !member.isPresent() ? String.format("Não foi possível localizar o membro de ID: %d \n",memberId): "";
-		msg += !lodge.isPresent() ? String.format("Não foi possível localizar a Loja de ID: %d \n",lodgeId): "";
+		msg += member.isEmpty() ? String.format("Não foi possível localizar o membro de ID: %d \n",memberId): "";
+		msg += lodge.isEmpty() ? String.format("Não foi possível localizar a Loja de ID: %d \n",lodgeId): "";
 		if(member.isPresent() && lodge.isPresent()){
 			member.get().setLodge(lodge.get());
 			msg = "Membro: "+member.get().getName()+" associado a loja: "+lodge.get().getName();

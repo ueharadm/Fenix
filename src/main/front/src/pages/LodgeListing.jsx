@@ -63,9 +63,9 @@ function Lodges() {
                 key={lodge.name}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
-                <TableCell>{lodge.id}</TableCell>
-                <TableCell>{lodge.name}</TableCell>
-                <TableCell>{lodge.register}</TableCell>
+                <TableCell>{lodge.id ?? ''}</TableCell>
+                <TableCell>{lodge.name ?? ''}</TableCell>
+                <TableCell>{lodge.register ?? ''}</TableCell>
               </TableRow>
             ))}
           </TableBody>

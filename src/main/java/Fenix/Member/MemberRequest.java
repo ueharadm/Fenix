@@ -1,5 +1,6 @@
 package Fenix.Member;
 
+import Fenix.Attendance.AttendanceRule;
 import Fenix.Lodge.Lodge;
 import Fenix.Meeting.Meeting;
 import jakarta.annotation.Nonnull;
@@ -26,5 +27,6 @@ public class MemberRequest {
     private LocalDate birthDate;
     @Nonnull
     private LocalDate initiationDate;
+    private AttendanceRule attendanceRule;
     private boolean isRedeemed;
 }

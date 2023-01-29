@@ -32,9 +32,9 @@ public class AttendanceController {
             List<MemberAttendanceRecord> memberRates = new ArrayList<>();
             List<Member> memberList = memberRepository.findAll();
             for (Member member: memberList) {
-                double d = attendanceService.calculateAttendanceRate(request).getAttendanceRate();
+                //double d = attendanceService.calculateAttendanceRate(request).getAttendanceRate();
                 AttendanceResponse response = attendanceService.calculateAttendanceRate(request);
-                memberRates.add(new MemberAttendanceRecord(member, attendanceService.calculateAttendanceRate(new AttendanceRateRequest(member.getId(),request.getInitDate(),request.getFinalDate(),AttendanceRule.GENERAL)).getAttendanceRate()));
+                memberRates.add(new MemberAttendanceRecord(member, attendanceService.calculateAttendanceRate(new AttendanceRateRequest(member.getId(),request.getInitDate(),request.getFinalDate(),AttendanceRule.GERAL)).getAttendanceRate()));
             }
 
             AttendanceXlsxPrinter.generateReport(request.getInitDate(),request.getFinalDate(), memberRates);

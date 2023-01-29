@@ -1,5 +1,6 @@
 package Fenix.Member;
 
+import Fenix.Attendance.AttendanceRule;
 import Fenix.Lodge.Lodge;
 import Fenix.Meeting.Meeting;
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -42,6 +43,7 @@ public class Member {
 	private LocalDate birthDate;
 	private LocalDate initiationDate;
 	private boolean isRedeemed;
+	private AttendanceRule attendanceRule;
 	@ToString.Exclude
 	@JsonIgnore
 	@ManyToMany(mappedBy = "attendees")

@@ -21,6 +21,7 @@ function MemberRegistration() {
   const [lodgeId, setLodgeId] = useState('')
   const [birthDate, setBirthDate] = useState('')
   const [initiationDate, setInitiationDate] = useState('')
+  const [attendanceRule, setAttandanceRule] = useState('')
   const [lodges, setLodges] = useState([])
 
   let navigate = useNavigate()
@@ -41,6 +42,21 @@ function MemberRegistration() {
     {
       value: 'MESTRE',
       label: 'MESTRE'
+    }
+  ]
+
+  const rules = [
+    {
+      value: 'GERAL',
+      label: 'GERAL'
+    },
+    {
+      value: 'REMIDO',
+      label: 'REMIDO'
+    },
+    {
+      value: 'OFICIAL',
+      label: 'OFICIAL'
     }
   ]
 
@@ -66,7 +82,8 @@ function MemberRegistration() {
       degree: degree,
       lodgeId: lodgeId,
       birthDate: birthDate,
-      initiationDate: initiationDate
+      initiationDate: initiationDate,
+      attendanceRule: attendanceRule
     }
     fetch('http://localhost:8080/api/v1/member', {
       method: 'POST',
@@ -182,6 +199,21 @@ function MemberRegistration() {
                 shrink: true
               }}
             />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4} lg={3}>
+            <TextField
+              id="outlined-select-rule"
+              select
+              label="Regra de cálculo"
+              defaultValue="GERAL"
+              onChange={e => setAttandanceRule(e.target.value)}
+            >
+              {rules.map(rule => (
+                <MenuItem key={rule.value} value={rule.value}>
+                  {rule.label}
+                </MenuItem>
+              ))}
+            </TextField>
           </Grid>
         </Grid>
       </Box>

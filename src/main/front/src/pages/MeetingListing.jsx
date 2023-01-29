@@ -66,12 +66,12 @@ function Meetings() {
                 key={meeting.name}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
-                <TableCell>{meeting.id}</TableCell>
-                <TableCell>{meeting.number}</TableCell>
-                <TableCell>{meeting.worshipfulMaster.name}</TableCell>
-                <TableCell>{meeting.type}</TableCell>
-                <TableCell>{meeting.date}</TableCell>
-                <TableCell>{meeting.attendees.length}</TableCell>
+                <TableCell>{meeting.id ?? ''}</TableCell>
+                <TableCell>{meeting.number ?? ''}</TableCell>
+                <TableCell>{meeting.worshipfulMaster.name ?? ''}</TableCell>
+                <TableCell>{meeting.type ?? ''}</TableCell>
+                <TableCell>{meeting.date ?? ''}</TableCell>
+                <TableCell>{meeting.attendees.length ?? ''}</TableCell>
               </TableRow>
             ))}
           </TableBody>

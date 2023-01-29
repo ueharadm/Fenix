@@ -57,6 +57,7 @@ function Members() {
               <TableCell>Loja</TableCell>
               <TableCell>Matrícula</TableCell>
               <TableCell>Grau</TableCell>
+              <TableCell>Regra de cálculo</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -65,11 +66,12 @@ function Members() {
                 key={member.name}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
-                <TableCell>{member.id}</TableCell>
-                <TableCell>{member.name}</TableCell>
-                <TableCell>{member.lodge.id}</TableCell>
-                <TableCell>{member.registration}</TableCell>
-                <TableCell>{member.degree}</TableCell>
+                <TableCell>{member.id ?? ''}</TableCell>
+                <TableCell>{member.name ?? ''}</TableCell>
+                <TableCell>{member.lodge.id ?? ''}</TableCell>
+                <TableCell>{member.registration ?? ''}</TableCell>
+                <TableCell>{member.degree ?? ''}</TableCell>
+                <TableCell>{member.attendanceRule ?? ''}</TableCell>
               </TableRow>
             ))}
           </TableBody>
