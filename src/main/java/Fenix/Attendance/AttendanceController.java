@@ -1,17 +1,13 @@
 package Fenix.Attendance;
 
 import Fenix.Member.Member;
-import Fenix.Member.MemberController;
 import Fenix.Member.MemberRepository;
 import lombok.AllArgsConstructor;
-import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/attendance")
@@ -42,5 +38,15 @@ public class AttendanceController {
             System.err.println("Erro generateAttendanceReport");
         }
 
+    }
+
+    @GetMapping("/memberReport/{memberId}")
+    public AttendanceResponse getMemberReport(@PathVariable("memberId") Integer memberId){
+        try{
+        return attendanceService.memberAttendanceRate(memberId);
+        } catch (Exception e){
+            System.out.println(e);
+            return null;
+        }
     }
 }
