@@ -45,6 +45,7 @@ public class AttendanceController {
         try{
         return attendanceService.memberAttendanceRate(memberId);
         } catch (Exception e){
+            //TODO: Exception handling
             System.out.println(e);
             return null;
         }
