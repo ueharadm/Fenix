@@ -25,7 +25,9 @@ public class MeetingService {
     public void createMeeting(MeetingRequest request) {
         Meeting meeting = new Meeting();
         meeting.setNumber(request.getNumber());
-        meeting.setWorshipfulMaster(request.getWorshipfulMaster());
+        Optional<Member> WorshipfulMaster = memberRepository.findById(request.getWorshipfulMasterId());
+        //TODO: Deal with orElse to return something instead of null
+        meeting.setWorshipfulMaster(WorshipfulMaster.orElse(null));
         meeting.setType(request.getType());
         meeting.setDate(request.getDate());
         meeting.setAttendees(request.getAttendees());
@@ -52,7 +54,9 @@ public class MeetingService {
         Meeting meeting = new Meeting();
         meeting.setId(meetingId);
         meeting.setNumber(request.getNumber());
-        meeting.setWorshipfulMaster(request.getWorshipfulMaster());
+        Optional<Member> WorshipfulMaster = memberRepository.findById(request.getWorshipfulMasterId());
+        //TODO: Deal with orElse to return something instead of null
+        meeting.setWorshipfulMaster(WorshipfulMaster.orElse(null));
         meeting.setType(request.getType());
         meeting.setDate(request.getDate());
         meeting.setAttendees(request.getAttendees());
@@ -101,7 +105,7 @@ public class MeetingService {
     public String PrintAllMeetings(){
         try{
             List<Meeting> meetings = getAllMeetings();
-            MeetingXlsxPrinter.printMeetings(meetings, "TestAllMeetings.xlsx");
+            MeetingXlsxPrinter.printMeetings(meetings, "Reunioes_completo.xlsx");
             return "Sucesso";
         } catch (Exception e) {
             throw new RuntimeException(e);

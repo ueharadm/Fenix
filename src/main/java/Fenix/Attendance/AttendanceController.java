@@ -35,7 +35,7 @@ public class AttendanceController {
 
             AttendanceXlsxPrinter.generateReport(request.getInitDate(),request.getFinalDate(), memberRates);
         } catch (Exception e){
-            System.err.println("Erro generateAttendanceReport");
+            System.err.println("Erro generateAttendanceReport"+e.getMessage());
         }
 
     }

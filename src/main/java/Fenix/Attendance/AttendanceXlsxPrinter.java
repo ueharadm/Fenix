@@ -53,7 +53,7 @@ public class AttendanceXlsxPrinter {
             XSSFCell dataCell = dataRow.createCell(0);
             dataCell.setCellValue(member.getName());
             dataCell = dataRow.createCell(1);
-            dataCell.setCellValue(member.getRegistration());
+            dataCell.setCellValue(member.getRegistration() != null ? member.getRegistration() : 0);
             dataCell = dataRow.createCell(2);
             dataCell.setCellValue(member.getDegree().toString());
             dataCell = dataRow.createCell(3);

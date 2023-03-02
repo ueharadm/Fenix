@@ -6,6 +6,7 @@ import Fenix.Lodge.LodgeRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,6 +73,8 @@ public class MemberService {
 
 	public LocalDate latestDateOrInitiationDate(Integer memberId, LocalDate date){
 		LocalDate initiationDate = memberRepository.findById(memberId).get().getInitiationDate();
+		//TODO: melhorar lógica, atualmente utiliza data de iniciação= 01/01/1900 para sempre retornar date caso nulo
+		initiationDate = (initiationDate != null) ? initiationDate : LocalDate.of(1900,1,1);
 		return LocalDateHelper.returnLatest(initiationDate,date);
 	}
 

@@ -19,7 +19,7 @@ public class MeetingRequest {
     @Nonnull
     private Integer number;
     @Nonnull
-    private Member worshipfulMaster;
+    private Integer worshipfulMasterId;
     @Nonnull
     @Enumerated(EnumType.STRING)
     private MeetingType type;

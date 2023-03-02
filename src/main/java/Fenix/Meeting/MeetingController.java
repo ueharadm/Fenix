@@ -86,7 +86,7 @@ public class MeetingController {
 
 	@GetMapping("/print/{meetingId}")
 	public void printMeeting(@PathVariable("meetingId") Integer meetingId, HttpServletResponse response) throws IOException {
-		String fileName = "TestMeeting";
+		String fileName = "Reuniao_";
 		meetingService.printMeeting(meetingId, fileName);
 		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.sendRedirect("/api/v1/download?fileName=" + fileName + meetingId + ".xlsx");

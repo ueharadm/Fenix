@@ -30,7 +30,7 @@ public class MeetingXlsxPrinter {
 
 
         XSSFWorkbook workbook = new XSSFWorkbook();
-        XSSFSheet sheet = workbook.createSheet("Meeting "+meeting.getNumber());
+        XSSFSheet sheet = workbook.createSheet("Reunião "+meeting.getNumber());
 
         // Create the header row
         XSSFRow headerRow1 = sheet.createRow(0);
@@ -134,7 +134,7 @@ public class MeetingXlsxPrinter {
         dataCell = dataRow.createCell(4);
         dataCell.setCellValue((member.getBirthDate() != null) ? member.getBirthDate().format(DateTimeFormatter.ISO_LOCAL_DATE) : LocalDate.of(1900,1,1).format(DateTimeFormatter.ISO_LOCAL_DATE));
         dataCell = dataRow.createCell(5);
-        dataCell.setCellValue(member.getInitiationDate().format(DateTimeFormatter.ISO_LOCAL_DATE));
+        dataCell.setCellValue((member.getBirthDate() != null) ? member.getInitiationDate().format(DateTimeFormatter.ISO_LOCAL_DATE) : LocalDate.of(1900,1,1).format(DateTimeFormatter.ISO_LOCAL_DATE));
     }
 }
 
