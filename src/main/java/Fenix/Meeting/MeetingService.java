@@ -25,13 +25,7 @@ public class MeetingService {
     public void createMeeting(MeetingRequest request) {
         Meeting meeting = new Meeting();
         meeting.setNumber(request.getNumber());
-        Optional<Member> member = memberRepository.findById(request.getWorshipfulMasterId());
-        System.out.println(!member.isPresent() ? String.format("Unable to find member with ID: %d \n",request.getWorshipfulMasterId()): "WorshipfulMaster assigned!");
-        if(member.isPresent()){
-            meeting.setWorshipfulMaster(member.get());
-        } else{
-            throw new WorshipfulMasterNotFoundException(request.getWorshipfulMasterId());
-        }
+        meeting.setWorshipfulMaster(request.getWorshipfulMaster());
         meeting.setType(request.getType());
         meeting.setDate(request.getDate());
         meeting.setAttendees(request.getAttendees());
@@ -55,16 +49,14 @@ public class MeetingService {
     }
 
     public void updateMeeting(Integer meetingId, MeetingRequest request) {
-        String msg = "";
         Meeting meeting = new Meeting();
         meeting.setId(meetingId);
         meeting.setNumber(request.getNumber());
-        Optional<Member> member = memberRepository.findById(request.getWorshipfulMasterId());
-        System.out.println(!member.isPresent() ? String.format("Unable to find member with ID: %d \n",request.getWorshipfulMasterId()): "WorshipfulMaster assigned!");
-        if(member.isPresent()){
-            meeting.setWorshipfulMaster(member.get());
-        }
-        memberRepository.save(member.get());
+        meeting.setWorshipfulMaster(request.getWorshipfulMaster());
+        meeting.setType(request.getType());
+        meeting.setDate(request.getDate());
+        meeting.setAttendees(request.getAttendees());
+        meetingRepository.save(meeting);
     }
 
     public List<Meeting> filterMeetings(LocalDate initDate, LocalDate finalDate) {
@@ -93,10 +85,23 @@ public class MeetingService {
         return "Membro ID:"+memberId+" não cadastrado";
     }
 
+    public String checkOutMember(Integer meetingId, Integer memberId) {
+        if(memberService.memberExists(memberId)){
+            Meeting meeting = meetingRepository.findById(meetingId).orElse(new Meeting());
+            meeting.getAttendees().remove(memberService.fetchMember(memberId).orElse(new Member()));
+            meetingRepository.save(meeting);
+            return meeting.getNumber()==null
+                    ? ("Não foi possível localizar a reunião: "+meetingId)
+                    : ("Member ID:"+memberId+" removido da reunião "+meetingId);
+        }
+
+        return "Membro ID:"+memberId+" não cadastrado";
+    }
+
     public String PrintAllMeetings(){
         try{
             List<Meeting> meetings = getAllMeetings();
-            MeetingXlsxPrinter.printMeetings(meetings, "TesteAllMeetings.xlsx");
+            MeetingXlsxPrinter.printMeetings(meetings, "TestAllMeetings.xlsx");
             return "Sucesso";
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -106,7 +111,7 @@ public class MeetingService {
     public String printMeeting(Integer meetingId, String fileName) {
         try{
             List<Meeting> meetings = getAllMeetings();
-            MeetingXlsxPrinter.printMeeting(meetingRepository.getReferenceById(meetingId), fileName+meetingId+".xlsx");
+            MeetingXlsxPrinter.printMeeting(meetingRepository.getReferenceById(meetingId), fileName+meetingId);
             return "Sucesso";
         } catch (Exception e) {
             throw new RuntimeException(e);

@@ -11,11 +11,12 @@ import {
   Button,
   Grid
 } from '@mui/material'
+import Meetings from './MeetingListing'
 
 function MeetingRegistration() {
   const [number, setNumber] = useState('')
   const [worshipfulMasterId, setWorshipfulMasterId] = useState('')
-  const [type, setType] = useState('')
+  const [type, setType] = useState('APRENDIZ')
   const [date, setDate] = useState('')
   const [attendees, setAttendees] = useState([])
 
@@ -154,6 +155,7 @@ function MeetingRegistration() {
           Registrar
         </Button>
       </Box>
+      <Meetings />
     </Container>
   )
 }

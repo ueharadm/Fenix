@@ -12,16 +12,16 @@ import {
   Button,
   Grid
 } from '@mui/material'
+import Members from './MemberListing'
 
 function MemberRegistration() {
   const [name, setName] = useState('')
   const [registration, setRegistration] = useState('')
-  const [degree, setDegree] = useState('')
-  const [lodge, setLodge] = useState('')
-  const [lodgeId, setLodgeId] = useState('')
+  const [degree, setDegree] = useState('APRENDIZ')
+  const [lodgeId, setLodgeId] = useState('1')
   const [birthDate, setBirthDate] = useState('')
   const [initiationDate, setInitiationDate] = useState('')
-  const [attendanceRule, setAttandanceRule] = useState('')
+  const [attendanceRule, setAttandanceRule] = useState('GERAL')
   const [lodges, setLodges] = useState([])
 
   let navigate = useNavigate()
@@ -99,6 +99,9 @@ function MemberRegistration() {
       .catch(error => {
         console.error('Error:', error)
       })
+      .then(
+        window.location.reload()
+      )
   }
 
   return (
@@ -150,6 +153,7 @@ function MemberRegistration() {
               select
               label="Grau"
               defaultValue="APRENDIZ"
+              required
               onChange={e => setDegree(e.target.value)}
             >
               {degrees.map(degree => (
@@ -165,7 +169,7 @@ function MemberRegistration() {
               id="outlined-select-lodge"
               select
               label="Loja"
-              defaultValue="1"
+              defaultValue={1}
               onChange={e => setLodgeId(e.target.value)}
             >
               {lodges.map(lodge => (
@@ -206,6 +210,7 @@ function MemberRegistration() {
               select
               label="Regra de cálculo"
               defaultValue="GERAL"
+              required
               onChange={e => setAttandanceRule(e.target.value)}
             >
               {rules.map(rule => (
@@ -233,6 +238,7 @@ function MemberRegistration() {
           Registrar
         </Button>
       </Box>
+      <Members />
     </Container>
   )
 }

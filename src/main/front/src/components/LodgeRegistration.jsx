@@ -12,6 +12,8 @@ import {
   Button,
   Grid
 } from '@mui/material'
+import LodgeListing from './LodgeListing'
+import Lodges from './LodgeListing'
 
 const LodgeRegistration = () => {
   const [name, setName] = useState('')
@@ -21,8 +23,9 @@ const LodgeRegistration = () => {
     e.preventDefault()
     const data = { name, register }
     try {
-      await await axios.post('http://localhost:8080/api/v1/lodge', data)
+      await axios.post('http://localhost:8080/api/v1/lodge', data)
       alert('Lodge registered successfully!')
+      window.location.reload()
     } catch (err) {
       console.error(err)
     }
@@ -82,6 +85,7 @@ const LodgeRegistration = () => {
           Registrar
         </Button>
       </Box>
+      <Lodges />
     </Container>
   )
 }

@@ -10,8 +10,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.FileOutputStream;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @Service
@@ -123,13 +126,13 @@ public class MeetingXlsxPrinter {
         XSSFCell dataCell = dataRow.createCell(0);
         dataCell.setCellValue(member.getName());
         dataCell = dataRow.createCell(1);
-        dataCell.setCellValue(member.getRegistration());
+        dataCell.setCellValue((member.getRegistration() != null) ? member.getRegistration() : 0);
         dataCell = dataRow.createCell(2);
         dataCell.setCellValue(member.getDegree().toString());
         dataCell = dataRow.createCell(3);
         dataCell.setCellValue(member.getLodge().getName());
         dataCell = dataRow.createCell(4);
-        dataCell.setCellValue(member.getBirthDate().format(DateTimeFormatter.ISO_LOCAL_DATE));
+        dataCell.setCellValue((member.getBirthDate() != null) ? member.getBirthDate().format(DateTimeFormatter.ISO_LOCAL_DATE) : LocalDate.of(1900,1,1).format(DateTimeFormatter.ISO_LOCAL_DATE));
         dataCell = dataRow.createCell(5);
         dataCell.setCellValue(member.getInitiationDate().format(DateTimeFormatter.ISO_LOCAL_DATE));
     }

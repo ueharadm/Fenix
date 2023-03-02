@@ -1,14 +1,11 @@
 package Fenix.Meeting;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-
 import Fenix.Member.Member;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -50,5 +47,5 @@ public class Meeting {
 			joinColumns = { @JoinColumn(name = "meeting_id")},
 			inverseJoinColumns = { @JoinColumn(name = "member_id")}
 	)
-	private List<Member> attendees;
+	private Set<Member> attendees;
 }

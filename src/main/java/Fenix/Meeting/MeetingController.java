@@ -1,15 +1,17 @@
 package Fenix.Meeting;
 
-import java.nio.file.NoSuchFileException;
+import java.io.IOException;
 import java.util.*;
 import java.time.LocalDate;
 
-import Fenix.Exceptions.WorshipfulMasterNotFoundException;
 import Fenix.Member.MemberRepository;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+
+@CrossOrigin
 @RestController
 @RequestMapping("api/v1/meeting")
 @AllArgsConstructor
@@ -67,6 +69,15 @@ public class MeetingController {
 		return msg;
 	}
 
+	@PutMapping("/checkOut/{meetingId}")
+	public String checkOutMember(@PathVariable("meetingId") Integer meetingId, @RequestBody MemberIdRequest request) {
+		String msg = "";
+		for (Integer memberId : request.memberIds) {
+			msg += meetingService.checkOutMember(meetingId, memberId) + "\n";
+		}
+		return msg;
+	}
+
 
 	@GetMapping("/printAll")
 	public String printAllMeetings() {
@@ -74,7 +85,11 @@ public class MeetingController {
 	}
 
 	@GetMapping("/print/{meetingId}")
-	public void printMeeting(@PathVariable("meetingId") Integer meetingId){
-		meetingService.printMeeting(meetingId, "TestMeeting");
+	public void printMeeting(@PathVariable("meetingId") Integer meetingId, HttpServletResponse response) throws IOException {
+		String fileName = "TestMeeting";
+		meetingService.printMeeting(meetingId, fileName);
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		response.sendRedirect("/api/v1/download?fileName=" + fileName + meetingId + ".xlsx");
 	}
+
 }

@@ -48,21 +48,12 @@ function HomePage() {
         }}
       >
         <Button variant="contained" onClick={handleLodgeRegistration}>
-          Cadastrar Loja
-        </Button>
-        <Button variant="contained" onClick={handleMemberRegistration}>
-          Cadastrar Membro
-        </Button>
-        <Button variant="contained" onClick={handleMeetingRegistration}>
-          Cadastrar Reunião
-        </Button>
-        <Button variant="contained" onClick={handleLodges}>
           Lojas
         </Button>
-        <Button variant="contained" onClick={handleMembers}>
+        <Button variant="contained" onClick={handleMemberRegistration}>
           Membros
         </Button>
-        <Button variant="contained" onClick={handleMeetings}>
+        <Button variant="contained" onClick={handleMeetingRegistration}>
           Reuniões
         </Button>
         <Button variant="contained" onClick={handleAttendanceRequest}>

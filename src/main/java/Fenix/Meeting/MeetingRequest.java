@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -18,11 +19,11 @@ public class MeetingRequest {
     @Nonnull
     private Integer number;
     @Nonnull
-    private Integer worshipfulMasterId;
+    private Member worshipfulMaster;
     @Nonnull
     @Enumerated(EnumType.STRING)
     private MeetingType type;
     @Nonnull
     private LocalDate date;
-    private List<Member> attendees;
+    private HashSet<Member> attendees;
 }

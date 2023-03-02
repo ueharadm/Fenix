@@ -3,15 +3,11 @@ package Fenix.Member;
 import Fenix.Attendance.AttendanceRule;
 import Fenix.Lodge.Lodge;
 import Fenix.Meeting.Meeting;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 @Entity
