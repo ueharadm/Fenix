@@ -31,3 +31,38 @@ Attendance control software designed to help a Masonic lodge to calculate attend
         - Create logic for relation with meeting.type with member.degree
     - Lodge
       - Cannot have more than 1 lodge with same register
+
+## Get Started
+Clone the project on to a local git folder
+```
+git clone https://github.com/ueharadm/Fenix.git
+```
+Using IntelliJ got to File >> Project Structure... >> And set SDK and Language level to at least JAVA 17
+
+Open docker-compose.yml and install the IntelliJ Docker plugin
+
+If you are running docker engine on WSL, configure the plugin for that.
+
+Run the service on your docker-compose.yml (docker compose up)
+
+Open a terminal with access to docker and find the postgres container
+
+```
+docker ps
+```
+Execute the container on iterative mode
+```
+docker exec -it <container_name or container_id> bash
+```
+Log onto psql
+```
+psql -U <postgres_username>
+```
+create the fenix database
+```
+create database fenix;
+```
+
+Open the Application (src/main/java/Fenix/Application.java) and execute it
+
+Congratulations back-end application is already running on localhost:8080
