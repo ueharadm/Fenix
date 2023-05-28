@@ -66,3 +66,11 @@ create database fenix;
 Open the Application (src/main/java/Fenix/Application.java) and execute it
 
 Congratulations back-end application is already running on localhost:8080
+
+## Run the Front-end
+
+## Expose the application to the world using ngrok
+
+```
+https://ngrok.com/docs/getting-started/
+```
