@@ -71,6 +71,4 @@ Congratulations back-end application is already running on localhost:8080
 
 ## Expose the application to the world using ngrok
 
-```
-https://ngrok.com/docs/getting-started/
-```
+- https://ngrok.com/docs/getting-started/
