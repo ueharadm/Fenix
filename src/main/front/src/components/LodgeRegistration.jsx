@@ -23,7 +23,7 @@ const LodgeRegistration = () => {
     e.preventDefault()
     const data = { name, register }
     try {
-      await axios.post('http://localhost:8080/api/v1/lodge', data)
+      await axios.post('api/v1/lodge', data)
       alert('Lodge registered successfully!')
       window.location.reload()
     } catch (err) {

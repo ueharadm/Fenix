@@ -22,7 +22,7 @@ function Meetings() {
   useEffect(() => {
     async function fetchMeetings() {
       try {
-        const response = await axios.get('http://localhost:8080/api/v1/meeting')
+        const response = await axios.get('api/v1/meeting')
         setMeetings(response.data)
       } catch (error) {
         console.log(error)

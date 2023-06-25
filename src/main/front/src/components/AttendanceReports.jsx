@@ -19,7 +19,7 @@ const AttendanceReports = () => {
     const data = { memberId, initDate, finalDate, rule }
     try {
       await axios.post(
-        'http://localhost:8080/api/v1/attendance/completeReport',
+        'api/v1/attendance/completeReport',
         data
       )
       alert('Report created successfully!')

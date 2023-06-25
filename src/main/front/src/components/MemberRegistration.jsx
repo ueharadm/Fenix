@@ -63,7 +63,7 @@ function MemberRegistration() {
   useEffect(() => {
     async function fetchLodges() {
       axios
-        .get('http://localhost:8080/api/v1/lodge')
+        .get('api/v1/lodge')
         .then(function (response) {
           setLodges(response.data)
         })
@@ -85,7 +85,7 @@ function MemberRegistration() {
       initiationDate: initiationDate,
       attendanceRule: attendanceRule
     }
-    fetch('http://localhost:8080/api/v1/member', {
+    fetch('api/v1/member', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

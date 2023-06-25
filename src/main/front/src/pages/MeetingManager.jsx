@@ -26,7 +26,7 @@ function MeetingManager() {
     async function fetchMeeting() {
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/v1/meeting/${number}`
+          `api/v1/meeting/${number}`
         )
         setMeeting(response.data)
       } catch (error) {
@@ -39,7 +39,7 @@ function MeetingManager() {
   useEffect(() => {
     async function fetchMembers() {
       try {
-        const response = await axios.get('http://localhost:8080/api/v1/member')
+        const response = await axios.get('api/v1/member')
         setMembers(response.data)
       } catch (error) {
         console.log(error)
@@ -62,7 +62,7 @@ function MeetingManager() {
   async function checkInMembers(memberIds) {
     try {
       const response = await axios.put(
-        `http://localhost:8080/api/v1/meeting/checkIn/${number}`,
+        `api/v1/meeting/checkIn/${number}`,
         {
           memberIds
         }
@@ -77,7 +77,7 @@ function MeetingManager() {
   async function checkOutMember(memberIds) {
     try {
       const response = await axios.put(
-        `http://localhost:8080/api/v1/meeting/checkOut/${number}`,
+        `api/v1/meeting/checkOut/${number}`,
         {
           memberIds
         }
@@ -93,7 +93,7 @@ function MeetingManager() {
     try {
       const response = await axios({
         method: 'get',
-        url: `http://localhost:8080/api/v1/meeting/print/${number}`,
+        url: `api/v1/meeting/print/${number}`,
         responseType: 'blob'
       })
       fileDownload(response.data, 'TestMeeting' + number + '.xlsx')

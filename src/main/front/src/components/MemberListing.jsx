@@ -12,7 +12,7 @@ function Members() {
   useEffect(() => {
     async function fetchMembers() {
       try {
-        const response = await axios.get('http://localhost:8080/api/v1/member')
+        const response = await axios.get('api/v1/member')
         setMembers(response.data)
       } catch (error) {
         console.log(error)

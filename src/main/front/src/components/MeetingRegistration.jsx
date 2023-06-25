@@ -49,7 +49,7 @@ function MeetingRegistration() {
       date: date,
       attendees: attendees
     }
-    fetch('http://localhost:8080/api/v1/meeting', {
+    fetch('api/v1/meeting', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

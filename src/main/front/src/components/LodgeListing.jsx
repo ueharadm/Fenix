@@ -27,7 +27,7 @@ function Lodges() {
   useEffect(() => {
     async function fetchLodges() {
       try {
-        const response = await axios.get('http://localhost:8080/api/v1/lodge')
+        const response = await axios.get('api/v1/lodge')
         setLodges(response.data)
       } catch (error) {
         console.log(error)
