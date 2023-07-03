@@ -6,6 +6,4 @@ RUN npm i
 
 COPY . .
 
-RUN npm run start
-
-CMD [ "sh" ]
+RUN npm run build
