@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11:ubi as build
+FROM eclipse-temurin:17.0.7_7-jdk as build
 
 WORKDIR /app
 
@@ -15,7 +15,7 @@ COPY src src
 RUN ./mvnw package -DskipTests
 RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
-FROM adoptopenjdk/openjdk11:ubi
+FROM eclipse-temurin:17.0.7_7-jdk
 
 ARG DEPENDENCY=/app/target/dependency
 
