@@ -50,15 +50,15 @@ Open a terminal with access to docker and find the postgres container
 ```
 docker ps
 ```
-Execute the container on iterative mode
+#### Execute the container on iterative mode
 ```
 docker exec -it <container_name or container_id> bash
 ```
-Log onto psql
+#### Log onto psql
 ```
 psql -U <postgres_username>
 ```
-create the fenix database
+#### create the fenix database
 ```
 create database fenix;
 ```
