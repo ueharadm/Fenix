@@ -1,23 +1,40 @@
-version: '3.3'
 services:
-  db:
+  postgres-db:
     container_name: postgres
     image: postgres
     environment:
       POSTGRES_USER: controlefenix
       POSTGRES_PASSWORD: fenix@123
+      POSTGRES_DB: fenix
       PGDATA: /data/postgres
     volumes:
-      - db:/data/postgres
+      - fenix:/data/postgres
     ports:
       - "5432:5432"
-    networks:
-      - db
     restart: unless-stopped
 
-networks:
-  db:
-    driver: bridge
+  back-end:
+    build:
+      context: back-end
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres-db
+    environment:
+      DB_URL: jdbc:postgresql://localhost:5432/fenix
+      DB_USERNAME: controlefenix
+      DB_PASSWORD: fenix@123
+      
+
+  front-end:
+    build:
+      context: front-end
+      dockerfile: Dockerfile
+    ports: 
+      - "3000:3000"
+    depends_on:
+      - back-end
 
 volumes:
-  db:
+  fenix:
